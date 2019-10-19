@@ -1,7 +1,7 @@
 <?php
     include('./create_table.php');
     class usermanagment{
-        private $conn;
+        private $conns;
         private $uname;
         private $firstname;
         private $lastname;
@@ -11,19 +11,8 @@
         
         function __construct()
         {
-            $servername = "localhost";
-            $username = "root";
-            $password = "123456";
-            try {
-                $connection = new PDO("mysql:host=$servername;dbname=onlinestore", $username, $password);
-                //set the PDO error mode to exception
-                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $this->conn = $connection;
-            }
-            catch(PDOException $e)
-            {
-                echo "Connection failed: " . $e->getMessage();
-            }
+            include('./connection.php');
+            $this->conns = $conn;
         }
         
         function setdata($uname, $firstname, $lastname, $phonenum, $email, $dateofbirth)
@@ -41,7 +30,7 @@
             try{
                 $sql = 'INSERT INTO users (username, firstname, lastname, phonenum, email, dateofbirth)
                         VALUES ( :username, :firstname, :lastname, :phonenum, :email, :dateofbirth)';
-                $aa = $this->conn->prepare($sql);
+                $aa = $this->conns->prepare($sql);
     
                 $aa->bindParam('username', $this->uname);
                 $aa->bindParam('firstname', $this->firstname);
@@ -62,7 +51,7 @@
         {   
             try{
                 $sql = 'DELETE FROM users WHERE userid=:userid';
-                $aa = $this->conn->prepare($sql);
+                $aa = $this->conns->prepare($sql);
                 $aa->bindParam(':userid', $userid);
                 $aa->execute();
                 echo "Record deleted successfully\n";
@@ -70,7 +59,6 @@
             {
                 echo $sql . "<br>" . $e->getMessage();
             }
-            $conn = NULL;
         }
         
         /* function to update user information in the database */
@@ -86,7 +74,7 @@
                         SET dateofbirth = :dateofbirth
                         WHERE userid = :userid';
                 $conn = retconn();
-                $aa = $conn->prepare($sql);
+                $aa = $conns->prepare($sql);
                 $aa->bindParam(':username', $this->uname);
                 $aa->bindParam(':firstname', $this->firstname);
                 $aa->bindParam(':lastname', $this->lastname);
@@ -102,27 +90,25 @@
             }
         }
 
-        /* select all data for user from the database /*/
+        /* select all data for user from the database */
         function selectuser($userid)
         {   
             try{
                 $sql = 'SELECT * FROM users
                         WHERE userid = :usserid';
-                $aa = $this->conn->prepare($sql);
+                $aa = $this->conns->prepare($sql);
                 $aa->bindParam(':userid', $userid);
                 $aa->execute();
-                echo "Record selected successfully\n";
-                return $aa;
+                //echo "Record selected successfully\n";
+                return ($aa->setFetchMode(PDO::FETCH_ASSOC));
             }catch (PDOException $e)
             {
                 echo $sql . "<br>" . $e->getMessage();
             }
-            $conn = NULL;
-            return 0;
         }
 
         function __destruct(){
-            $conn = NULL;
+            $conns = NULL;
         }
 }
 ?>
