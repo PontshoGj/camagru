@@ -9,13 +9,13 @@
         private $emails;
         private $dateofbirth;
         
-        function __construct()
+        public function __construct()
         {
             include('./connection.php');
             $this->conns = $conn;
         }
         
-        function setdata($uname, $firstname, $lastname, $phonenum, $email, $dateofbirth)
+        public function setdata($uname, $firstname, $lastname, $phonenum, $email, $dateofbirth)
         {
             $this->uname = $uname;
             $this->firstname = $firstname;
@@ -25,7 +25,7 @@
             $this->dateofbirth = $dateofbirth;
         }
 
-        function adduser()
+        public function adduser()
         {
             try{
                 $sql = 'INSERT INTO users (username, firstname, lastname, phonenum, email, dateofbirth)
@@ -47,7 +47,7 @@
         }
         
         /* function to delete of remove user from the database /*/  
-        function deluser($userid)
+        public function deluser($userid)
         {   
             try{
                 $sql = 'DELETE FROM users WHERE userid=:userid';
@@ -62,7 +62,7 @@
         }
         
         /* function to update user information in the database */
-        function moduser($userid)
+        public function moduser($userid)
         {   
             try{
                 $sql = 'UPDATET users 
@@ -73,7 +73,6 @@
                         SET email = :email
                         SET dateofbirth = :dateofbirth
                         WHERE userid = :userid';
-                $conn = retconn();
                 $aa = $conns->prepare($sql);
                 $aa->bindParam(':username', $this->uname);
                 $aa->bindParam(':firstname', $this->firstname);
@@ -91,7 +90,7 @@
         }
 
         /* select all data for user from the database */
-        function selectuser($userid)
+        public function selectuser($userid)
         {   
             try{
                 $sql = 'SELECT * FROM users
@@ -107,8 +106,8 @@
             }
         }
 
-        function __destruct(){
+        public function __destruct(){
             $conns = NULL;
         }
-}
+    }
 ?>
