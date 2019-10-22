@@ -4,10 +4,10 @@
     foreach($_POST as $key => $value)
         $array[$key] = $value;
 
-    if ($array['name'] && $array['surname'] && $array['id'] && $array['number'])
+    if ($array['username'] && $array['name'] && $array['email'] && $array['password'])
     {
         $reg = new usermanagment();
-        $reg->setdata($array['name'], $array['name'], $array['surname'], $array['number'], $array['address'], $array['id']);
+        $reg->setdata($array['username'], $array['name'], $array['email'], $array['password']);
         $reg->adduser();
         echo "User created\n";
     }

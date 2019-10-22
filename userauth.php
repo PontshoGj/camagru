@@ -9,8 +9,10 @@
             include('./connection.php');
             $this->conns = $conn;
         }
+
+
         /* check if the user provided the correct log in information */
-        public function checklogin($username, $password)
+        public function checklogin($username, $passwd)
         {
             $count;
             $val;
@@ -19,13 +21,15 @@
                 $sql = 'SELECT * FROM users WHERE username = :uname && passwd = :passwd';
                 $exe = $conns->prepare($sql);
                 $exe->bindParam(':uname', $username);
-                $exe->bindParam(':passwd', $password);
+                $exe->bindParam(':passwd', $passwd);
                 $exe->execute();
                 $val->setFetchMode(PDO::FETCH_ASSOC);
             }catch (PDOException $e)
             {
                 echo $sql . "<br>" . $e->getMessage();
             }
+
+
             /* checking if the user entered username and password is correct else check if the user entered an email not username*/
             $count = count($val);
             if ($count > 0)
@@ -37,7 +41,7 @@
                     $sql = 'SELECT * FROM users WHERE email = :uname && passwd = :passwd';
                     $exe = $conns->prepare($sql);
                     $exe->bindParam(':uname', $username);
-                    $exe->bindParam(':passwd', $password);
+                    $exe->bindParam(':passwd', $passwd);
                     $exe->execute();
                     $val->setFetchMode(PDO::FETCH_ASSOC);
                 }catch (PDOException $e)
@@ -51,6 +55,8 @@
                     return (0);
             }
         }
+
+
         /* send email to the user if the $username||$email provided is correct */
         public function passwordreset($username)
         {
@@ -72,9 +78,11 @@
 
             mail($to,$subject, $message,$headers);
 
-            header("location: #");
+            header("location: login.html");
 
-            }
+        }
+
+
         /* disconnecting from the database */
         function __destruct(){
             $conns = NULL;

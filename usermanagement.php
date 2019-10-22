@@ -3,11 +3,9 @@
     class usermanagment{
         private $conns;
         private $uname;
-        private $firstname;
-        private $lastname;
-        private $phonenum;
+        private $fullname;
         private $emails;
-        private $dateofbirth;
+        private $passwd;
         
         public function __construct()
         {
@@ -15,29 +13,25 @@
             $this->conns = $conn;
         }
         
-        public function setdata($uname, $firstname, $lastname, $phonenum, $email, $dateofbirth)
+        public function setdata($uname, $fullname, $email, $passwd)
         {
             $this->uname = $uname;
-            $this->firstname = $firstname;
-            $this->lastname = $lastname;
-            $this->phonenum = $phonenum;
+            $this->firstname = $fullname;
             $this->emails = $email;
-            $this->dateofbirth = $dateofbirth;
+            $this->passwd = $passwd;
         }
 
         public function adduser()
         {
             try{
-                $sql = 'INSERT INTO users (username, firstname, lastname, phonenum, email, dateofbirth)
-                        VALUES ( :username, :firstname, :lastname, :phonenum, :email, :dateofbirth)';
+                $sql = 'INSERT INTO users (username, fullname, email, passwd)
+                        VALUES ( :username, :fullname, :email, :passwd)';
                 $aa = $this->conns->prepare($sql);
     
-                $aa->bindParam('username', $this->uname);
-                $aa->bindParam('firstname', $this->firstname);
-                $aa->bindParam('lastname', $this->lastname);
-                $aa->bindParam('phonenum', $this->phonenum);
-                $aa->bindParam('email', $this->emails);
-                $aa->bindParam('dateofbirth', $this->dateofbirth);
+                $aa->bindParam(':username', $this->uname);
+                $aa->bindParam(':fullname', $this->fullname);
+                $aa->bindParam(':email', $this->emails);
+                $aa->bindParam(':passwd', $this->passwd);
                 $aa->execute();
                 echo "Record created successfully\n";
             }catch (PDOException $e)
@@ -67,19 +61,15 @@
             try{
                 $sql = 'UPDATET users 
                         SET username = :username
-                        SET firstname = :firstname
-                        SET lastname = :lastname
-                        SET phonenum = :phonenum
+                        SET firstname = :fullname
                         SET email = :email
-                        SET dateofbirth = :dateofbirth
+                        SET passwd = :passwd
                         WHERE userid = :userid';
                 $aa = $conns->prepare($sql);
                 $aa->bindParam(':username', $this->uname);
-                $aa->bindParam(':firstname', $this->firstname);
-                $aa->bindParam(':lastname', $this->lastname);
-                $aa->bindParam(':phonenum', $this->phonenum);
+                $aa->bindParam(':firstname', $this->fullname);
                 $aa->bindParam(':email', $this->emails);
-                $aa->bindParam(':dateofbirth', $this->dateofbirth);
+                $aa->bindParam(':passwd', $this->passwd);
                 $aa->bindParam(':userid', $this->userid);
                 $aa->execute();
                 echo "Record updated successfully\n";
