@@ -12,48 +12,42 @@
 
 
         /* check if the user provided the correct log in information */
-        public function checklogin($username, $passwd)
+        public function checklogin($uname, $passwd)
         {
-            $count;
-            $val;
-            /* cehcking if the user enter a username and password */
-            try{
-                $sql = 'SELECT * FROM users WHERE username = :uname && passwd = :passwd';
-                $exe = $conns->prepare($sql);
-                $exe->bindParam(':uname', $username);
-                $exe->bindParam(':passwd', $passwd);
-                $exe->execute();
-                $val->setFetchMode(PDO::FETCH_ASSOC);
-                if (($val = count($stmt->fetchAll())))
-                    return 1;
-            }catch (PDOException $e)
-            {
-                echo $sql . "<br>" . $e->getMessage();
-            }
-
-
-            /* checking if the user entered username and password is correct else check if the user entered an email not username*/
-            $count = count($val);
-            if ($count > 0)
-                return (1);
-            else
-            {
-                /* check  if the user entered email is correct if the username was wrong*/
+            if (!preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $passwd))
+                 return 0; 
+               
+            if (preg_match('/[A-Za-z0-9]{6,}/', $uname)){
                 try{
-                    $sql = 'SELECT * FROM users WHERE email = :uname && passwd = :passwd';
-                    $exe = $conns->prepare($sql);
-                    $exe->bindParam(':uname', $username);
-                    $exe->bindParam(':passwd', $passwd);
-                    $exe->execute();
-                    $val->setFetchMode(PDO::FETCH_ASSOC);
+                    $sql = 'SELECT * FROM users WHERE username = :uname && passwd = :passwd;';
+                    $stmt = $this->conns->prepare($sql);
+                    $stmt->bindParam(":uname", $uname);
+                    $stmt->bindParam(":passwd", $passwd);
+                    $stmt->execute();
+                    $rot = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                     if (count($stmt->fetchAll()))
                         return 1;
                 }catch (PDOException $e)
                 {
-                    echo $sql . "<br>" . $e->getMessage();
+                    echo "Selection failed: " . $e->getMessage();
                 }
-                return (0);
             }
+            if(filter_var($uname, FILTER_VALIDATE_EMAIL)){
+                try{
+                    $sql = 'SELECT * FROM users WHERE email = :uname && passwd = :passwd;';
+                    $stmt = $this->conns->prepare($sql);
+                    $stmt->bindParam(":uname", $uname);
+                    $stmt->bindParam(":passwd", $passwd);
+                    $stmt->execute();
+                    $rot = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                    if (count($stmt->fetchAll()))
+                        return 1;
+                }catch (PDOException $e)
+                {
+                    echo "Selection failed: " . $e->getMessage();
+                }
+             }
+             return 0;
         }
 
         /*  */
@@ -63,6 +57,23 @@
                 $sql = 'SELECT userid FROM users WHERE email = :email';
                 $exe = $this->conns->prepare($sql);
                 $exe->bindParam(':email', $email);
+                $exe->execute();
+                $val = $exe->setFetchMode(PDO::FETCH_ASSOC);
+                return ($exe->fetchAll());
+            }catch (PDOException $e)
+            {
+                echo $sql . "<br>" . $e->getMessage();
+            }
+            return (0);
+        }
+
+        /*  */
+        public function getuserid2($username)
+        {
+            try{
+                $sql = 'SELECT userid FROM users WHERE username = :username';
+                $exe = $this->conns->prepare($sql);
+                $exe->bindParam(':username', $username);
                 $exe->execute();
                 $val = $exe->setFetchMode(PDO::FETCH_ASSOC);
                 return ($exe->fetchAll());

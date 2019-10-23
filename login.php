@@ -1,14 +1,16 @@
 
 <?php
+    session_start();
     include('./userauth.php');
     $retrive = array();
     $not_val = "";
     foreach($_POST as $key => $value)
         $retrive[$key] = $value;
     if ($retrive["username"] && $retrive["password"] && $retrive["submit"]) {
-        $va = new checklogin();
+        $va = new userauth();
         if ($va->checklogin($retrive['username'], $retrive['password'])){
-            header("location: contents.php");
+            $_SESSION['username'] = $va->getuserid2($retrive["username"]);
+            header("location: content.php");
         }
         else{
             $not_val = "incorect username or password";
@@ -34,7 +36,7 @@
             </div>
             <div class="form_reg"> 
                 <div><?php echo $not_val;?></div>
-                <form method="POST">
+                <form action="login.php" method="POST">
                     <p><input type="text" name="username" placeholder="Username or Email" id="username" required></p>
                     <p><input type="password" name="password" id="password" placeholder="Password" required></p>
                     <p> <input type="submit" value="Login" name="submit" id="submit"></p>
