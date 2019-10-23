@@ -1,5 +1,6 @@
 <?php
-    include('./create_table.php');
+    //include('./create_table.php');
+    require_once("./userauth.php");
     class usermanagment{
         private $conns;
         private $uname;
@@ -33,11 +34,13 @@
                 $aa->bindParam(':email', $this->emails);
                 $aa->bindParam(':passwd', $this->passwd);
                 $aa->execute();
-                echo "Record created successfully\n";
             }catch (PDOException $e)
             {
                 echo $sql . "<br>" . $e->getMessage() . "\n";
             }
+            echo "fff";
+            $confirm = new userauth();
+            $confirm->emailconfo($this->emails);
         }
         
         /* function to delete of remove user from the database /*/  
@@ -89,7 +92,8 @@
                 $aa->bindParam(':userid', $userid);
                 $aa->execute();
                 //echo "Record selected successfully\n";
-                return ($aa->setFetchMode(PDO::FETCH_ASSOC));
+                $aa->setFetchMode(PDO::FETCH_ASSOC);
+                return ($stmt->fetchAll());
             }catch (PDOException $e)
             {
                 echo $sql . "<br>" . $e->getMessage();
