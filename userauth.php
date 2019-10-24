@@ -201,6 +201,49 @@
             return 1;
         }
 
+        /*  */
+        public function checktoken($selec, $token)
+        {
+            try{
+                $sql = 'SELECT userid FROM auth WHERE selec = :selec && token = :token';
+                $exe = $this->conns->prepare($sql);
+                $exe->bindParam(':selec', $selec);
+                $exe->bindParam(':token', $token);
+                $exe->execute();
+                $val = $exe->setFetchMode(PDO::FETCH_ASSOC);
+                if ($uid = $exe->fetchAll())
+                {
+                    $sql = 'DELETE FROM auth WHERE selec = :selec && token = :token';
+                    $exe = $this->conns->prepare($sql);
+                    $exe->bindParam(':selec', $selec);
+                    $exe->bindParam(':token', $token);
+                    $exe->execute();
+                    return $uid;
+                }
+            }catch (PDOException $e)
+            {
+                echo $sql . "<br>" . $e->getMessage();
+            }
+            return (0);
+        }
+
+        public function updatepass($passwd, $userid, $re_passwd)
+        {
+            if (strcmp($passwd, $re_passwd))
+                return 0;
+            try{
+                $sql = "UPDATE users SET passwd= :passwd WHERE userid=:userid";
+                $stmt = $this->conns->prepare($sql);
+                $stmt->bindParam(":passwd", $passwd);
+                $stmt->bindParam(":userid", $userid);
+                $stmt->execute();
+            }catch (PDOException $e)
+            {
+                echo "Selection failed: " . $e->getMessage();
+            }
+            return 1;
+        }
+
         /* disconnecting from the database */
         function __destruct(){
             $conns = NULL;
