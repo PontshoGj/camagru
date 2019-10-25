@@ -19,10 +19,12 @@
                
             if (preg_match('/[A-Za-z0-9]{6,}/', $uname)){
                 try{
-                    $sql = 'SELECT * FROM users WHERE username = :uname && passwd = :passwd;';
+                    $a = "1";
+                    $sql = 'SELECT * FROM users WHERE username = :uname && passwd = :passwd && OK = :a';
                     $stmt = $this->conns->prepare($sql);
                     $stmt->bindParam(":uname", $uname);
                     $stmt->bindParam(":passwd", $passwd);
+                    $stmt->bindParam(":a", $a);
                     $stmt->execute();
                     $rot = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                     if (count($stmt->fetchAll()))
@@ -34,10 +36,12 @@
             }
             if(filter_var($uname, FILTER_VALIDATE_EMAIL)){
                 try{
-                    $sql = 'SELECT * FROM users WHERE email = :uname && passwd = :passwd;';
+                    $a = "1";
+                    $sql = 'SELECT * FROM users WHERE email = :uname && passwd = :passwd && OK = :a';
                     $stmt = $this->conns->prepare($sql);
                     $stmt->bindParam(":uname", $uname);
                     $stmt->bindParam(":passwd", $passwd);
+                    $stmt->bindParam(":a", $a);
                     $stmt->execute();
                     $rot = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                     if (count($stmt->fetchAll()))

@@ -10,7 +10,7 @@
         $va = new userauth();
         if ($va->checklogin($retrive['username'], $retrive['password'])){
             $_SESSION['username'] = $va->getuserid2($retrive["username"]);
-            header("location: content.php");
+            header("location: gallery.php");
         }
         else{
             $not_val = "incorect username or password";
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="box-2">
-            <p>Don't have an account? <a href="Register.html">Sign up</a></p>
+            <p>Don't have an account? <a href="registration.php">Sign up</a></p>
         </div>
     </div>
 
