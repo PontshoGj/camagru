@@ -152,6 +152,30 @@
             }
         }
 
+        public function checkemail($selec)
+        {
+            try{
+                $sql = 'SELECT userid FROM emailconfirm WHERE selec = :selec;';
+                $stmt = $this->conns->prepare($sql);
+                $stmt->bindParam(":selec", $selec);
+                $stmt->execute();
+                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $ret = $stmt->fetchAll();
+                $sql = "UPDATE users SET OK = 1 WHERE userid=:userid;";
+                $stmt = $this->conns->prepare($sql);
+                $stmt->bindParam(":userid", $ret[0]['userid']);
+                $stmt->execute();
+                $sql = 'DELETE FROM emailconfirm WHERE userid = :userid;';
+                $stmt = $this->conns->prepare($sql);
+                $stmt->bindParam(':userid', $ret[0]['userid']);
+                $stmt->execute();
+            }catch (PDOException $e)
+            {
+                echo "Selection failed: " . $e->getMessage();
+            }
+            return 1;
+        }
+
 
         /*    */
         public function test_user($uname)
