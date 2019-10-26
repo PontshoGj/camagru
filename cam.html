@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+ 
 </head>
 <body>
     <div class="video-wrap">
@@ -15,44 +16,76 @@
         <button id="snap">Capture</button>
     </div>
 
-    <canvas id="canvas" width="640" height="480"></canvas>
-
+    <div><canvas id="canvas" width="640" height="480"></canvas></div>
+    <div>
+        <button id="save" style="display: none;">Save</button>
+    </div>
+    <div id="imagediv">
+        <!-- <img src="" id="saveimage" style="float: left; border: 1px solid black; margin-left: 10px;"> -->
+    </div>
     <script>
-        'use strict';
-
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const snap = document.getElementById('snap');
-        const errorMsgElement = document.getElementById('span#ErrorMsg');
-
-        const constraints = {
-            audio: true,
-            video:{
-                width: 1280, height: 720
+            'use strict';
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const snap = document.getElementById('snap');
+            const btndisplay = document.getElementById("save");
+            // const imagesave = document.getElementById("saveimage");
+            const errorMsgElement = document.getElementById('span#ErrorMsg');
+            const constraints = {
+                audio: true,
+                video:{
+                    width: 1280, height: 720
+                }
+            };
+            async function init()
+            {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    handleSuccess(stream);
+                } catch (e) {
+                    errorMsgElement.innerHTML = 'navigator.getUserMedia.error:${e.toString()}';
+                }
             }
-        };
-
-        async function init()
-        {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia(constraints);
-                handleSuccess(stream);
-            } catch (e) {
-                errorMsgElement.innerHTML = 'navigator.getUserMedia.error:${e.toString()}';
+            function handleSuccess(stream){
+                window.stream = stream;
+                video.srcObject = stream;
             }
-        }
+            init();
+            var context = canvas.getContext('2d');
+            snap.addEventListener("click", function(){
+                context.drawImage(video, 0, 0, 640, 480);
+                // document.getElementById("video").style.display = "none";
+                // document.getElementById("snap").style.display = "none";
+                // let stream2 = video.srcObject;
+                // let tracks = stream2.getTracks();
+                // tracks.forEach(function(track){
+                //     track.stop();
+                // });
+                if (!document.getElementById('imagediv'))
+                {
+                    var imagedv = document.createElement("div");
+                    // imagedv.setAttribute('id', 'imagediv');
 
-        function handleSuccess(stream){
-            window.stream = stream;
-            video.srcObject = stream;
-        }
+                }else{
+                    const imagedv = document.getElementById("imagediv");
+                }
 
-        init();
+                    var img = document.createElement("img");
+                    img.setAttribute('id', 'saveimage');
+                    imagedv.appendChild(img);
+                    const dataURI = canvas.toDataURL();
+                    imagesave.src = dataURI;
+            });
 
-        var context = canvas.getContext('2d');
-        snap.addEventListener("click", function(){
-            context.drawImage(video, 0, 0, 640, 480);
-        });
-    </script>
+            // const btndisplay = document.querySelector("#save");
+            // const imagesave = document.querySelector("#saveimage");
+
+            // btndisplay.addEventListener('click', function(){
+            //     const dataURI = canvas.toDataURI();
+            //     imagesave.src = dataURI;
+            // });
+            
+        </script>
+
 </body>
 </html>
