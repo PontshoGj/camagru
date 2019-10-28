@@ -16,19 +16,19 @@
         <button id="snap">Capture</button>
     </div>
 
-    <div><canvas id="canvas" width="640" height="480"></canvas></div>
+    <canvas id="canvas" width="640" height="480"></canvas>
     <div>
         <button id="save" style="display: none;">Save</button>
     </div>
-    <div id="imagediv">
-        <!-- <img src="" id="saveimage" style="float: left; border: 1px solid black; margin-left: 10px;"> -->
-    </div>
+    <!-- <div id="imagediv">
+         <img src="" id="saveimage" style="float: left; border: 1px solid black; margin-left: 10px;">
+    </div> -->
     <script>
             'use strict';
             const video = document.getElementById('video');
             const canvas = document.getElementById('canvas');
             const snap = document.getElementById('snap');
-            const btndisplay = document.getElementById("save");
+            // const btndisplay = document.getElementById("save");
             // const imagesave = document.getElementById("saveimage");
             const errorMsgElement = document.getElementById('span#ErrorMsg');
             const constraints = {
@@ -54,27 +54,27 @@
             var context = canvas.getContext('2d');
             snap.addEventListener("click", function(){
                 context.drawImage(video, 0, 0, 640, 480);
-                // document.getElementById("video").style.display = "none";
-                // document.getElementById("snap").style.display = "none";
-                // let stream2 = video.srcObject;
-                // let tracks = stream2.getTracks();
-                // tracks.forEach(function(track){
-                //     track.stop();
-                // });
-                if (!document.getElementById('imagediv'))
-                {
-                    var imagedv = document.createElement("div");
-                    // imagedv.setAttribute('id', 'imagediv');
+                document.getElementById("video").style.display = "none";
+                document.getElementById("snap").style.display = "none";
+                let stream2 = video.srcObject;
+                let tracks = stream2.getTracks();
+                tracks.forEach(function(track){
+                    track.stop();
+                });
+                // if (!document.getElementById('imagediv'))
+                // {
+                //     var imagedv = document.createElement("div");
+                //     // imagedv.setAttribute('id', 'imagediv');
 
-                }else{
-                    const imagedv = document.getElementById("imagediv");
-                }
+                // }else{
+                //     const imagedv = document.getElementById("imagediv");
+                // }
 
-                    var img = document.createElement("img");
-                    img.setAttribute('id', 'saveimage');
-                    imagedv.appendChild(img);
-                    const dataURI = canvas.toDataURL();
-                    imagesave.src = dataURI;
+                //     var img = document.createElement("img");
+                //     img.setAttribute('id', 'saveimage');
+                //     imagedv.appendChild(img);
+                //     const dataURI = canvas.toDataURL();
+                //     imagesave.src = dataURI;
             });
 
             // const btndisplay = document.querySelector("#save");
