@@ -6,12 +6,35 @@
         $reimage = explode(",", $retrive['image']);
         $encodedData = str_replace(' ','+',$reimage[1]);
         $decodedData = base64_decode($encodedData);
-        $fp = fopen("canvas.png", 'wb');
+        $fp = fopen("canvas.jpeg", 'wb');
         fwrite($fp, $decodedData);
         fclose();
-        include_once('./picdb.php');
-        $as = new picdb();
-        $as->tempsave($retrive['image']);
+        switch($retrive['rad']){
+            case "ballon":
+                $srcImg = imagecreatefrompng('ballons.png');
+                $destImg = imagecreatefrompng('canvas.ping');
+                if (imagecopymerge($destImg, $srcImg, 0, 0, 0, 0, 640, 480, 100))
+                {
+                    header('Content-Type: image/png');
+                    imagepng($destImg, 'meg.png');
+                }
+                // imagedestroy($destImg);
+                // imagedestroy($srcImg);                
+                break;
+            case "butterfly":
+                echo "dfg";
+                break;
+            case "vine":
+                echo "cvb";
+                break;
+            case "decor":
+                echo "zsxd";
+                break;
+            default:
+                include_once('./picdb.php');
+                $as = new picdb();
+                $as->tempsave($retrive['image']);
+        }
     }
 ?>
 
@@ -34,10 +57,10 @@
             <input type="hidden" value="" id="image" name="image">
         <div class="controller">
             <button id="snap" type="submit">Capture</button>
-            ballon<input type="radio" id="rad" name="ballon" value="ballon">
-            butterfly<input type="radio" id="rad" name="butterfly" value="butterfly">
-            vine<input type="radio" id="rad" name="vine" value="vine">
-            decor<input type="radio" id="rad" name="decor" palceholder="decor">
+            ballon<input type="radio" id="rad" name="rad" value="ballon">
+            butterfly<input type="radio" id="rad" name="rad" value="butterfly">
+            vine<input type="radio" id="rad" name="rad" value="vine">
+            decor<input type="radio" id="rad" name="rad" palceholder="decor">
         </div>
 
         <canvas id="canvas" width="640" height="480"></canvas>
@@ -47,9 +70,13 @@
             include_once('./picdb.php');
             $arr = new picdb();
             $display = $arr->getsave();
-            print_r($display);
-            // foreach($display as $key=>$value) 
-            //     echo $value; 
+            //print_r($display);
+            // foreach($display as $key=>$value)
+            $i = 0;
+            while($i < count($display))
+            { 
+                echo '<img src="'.$display[$i++]['images'].'">';
+            } 
         ?>
     </div>
 
