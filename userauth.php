@@ -6,7 +6,7 @@
         /* connecting to the database */
         function __construct()
         {
-            include('./connection.php');
+            include_once('./connection.php');
             $this->conns = $conn;
         }
 
@@ -14,8 +14,8 @@
         /* check if the user provided the correct log in information */
         public function checklogin($uname, $passwd)
         {
-            if (!preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $passwd))
-                 return 0; 
+            // if (!preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $passwd))
+            //      return 0; 
                
             if (preg_match('/[A-Za-z0-9]{6,}/', $uname)){
                 try{

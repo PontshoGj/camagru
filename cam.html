@@ -1,22 +1,59 @@
+<?php
+    //include_once('./sessionmanagement.php');
+    include('picpro.php');
+    if ($_POST['ims'])
+    {
+        include_once('savimg.php');
+        $ar = new saveimg();
+        // $ar->saveimg($_POST['ims'], $_SESSION['username']);
+        header('Location: gallery.php');
+     }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Edit</title>
  
 </head>
 <body>
-    <div class="video-wrap">
-        <video id="video" playsinline autoplay></video>
-    </div>
+    <div style="float: left; margin-left: 500px;">
+        <form actio="cam.php" method="post">
+            <div class="video-wrap" >
+                <video id="video" playsinline autoplay></video>
+            </div>
 
-    <div class="controller">
-        <button id="snap">Capture</button>
-    </div>
+                <input type="hidden" value="" id="image" name="image">
+            <div class="controller">
+                <button id="snap" type="submit">Capture</button>
+                bat<input type="radio" id="rad" name="rad" value="bat">
+                glass<input type="radio" id="rad" name="rad" value="glass">
+                tree<input type="radio" id="rad" name="rad" value="tree">
+            </div>
 
-    <canvas id="canvas" width="640" height="480"></canvas>
+            <canvas id="canvas" width="450" height="450" style="float:left;"></canvas>
+        </form>
+    </div>
+    <div style="float: right; width: 400px; hight: auto;">
+        <form action="cam.php" method="post">
+        <?php
+            include('./picdb.php');
+            $arr = new picdb();
+            $display = $arr->getsave();
+            $i = 0;
+            while($i < count($display))
+            {
+                // echo '<input type="checkbox" name="ima" value="'.$display[$i++]['images'].'" id="ima">'; 
+                echo '<button id="s" name="ims" value="'.$display[$i]['images'].'"><img src="'.$display[$i]['images'].'" style="width: 100px; hight: 100px;" ></button>';
+                $i++;
+            } 
+        ?>
+        </form>
+    </div>
+            <!-- <a href="logout.php">logout.php</a> -->
     <div>
         <button id="save" style="display: none;">Save</button>
     </div>
@@ -28,13 +65,12 @@
             const video = document.getElementById('video');
             const canvas = document.getElementById('canvas');
             const snap = document.getElementById('snap');
-            // const btndisplay = document.getElementById("save");
+            const image = document.getElementById("image");
             // const imagesave = document.getElementById("saveimage");
             const errorMsgElement = document.getElementById('span#ErrorMsg');
             const constraints = {
-                audio: true,
                 video:{
-                    width: 1280, height: 720
+                    width: 450, height: 450
                 }
             };
             async function init()
@@ -53,14 +89,17 @@
             init();
             var context = canvas.getContext('2d');
             snap.addEventListener("click", function(){
-                context.drawImage(video, 0, 0, 640, 480);
-                document.getElementById("video").style.display = "none";
-                document.getElementById("snap").style.display = "none";
-                let stream2 = video.srcObject;
-                let tracks = stream2.getTracks();
-                tracks.forEach(function(track){
-                    track.stop();
-                });
+                context.drawImage(video, 0, 0, 450, 450);
+                // document.getElementById("video").style.display = "none";
+                // document.getElementById("snap").style.display = "none";
+                // let stream2 = video.srcObject;
+                // let tracks = stream2.getTracks();
+                // tracks.forEach(function(track){
+                //     track.stop();
+                // });
+                const dataURI = canvas.toDataURL();
+                //imagesave.src = dataURI;
+                image.setAttribute('value', dataURI);
                 // if (!document.getElementById('imagediv'))
                 // {
                 //     var imagedv = document.createElement("div");
@@ -70,9 +109,6 @@
                 //     const imagedv = document.getElementById("imagediv");
                 // }
 
-                //     var img = document.createElement("img");
-                //     img.setAttribute('id', 'saveimage');
-                //     imagedv.appendChild(img);
                 //     const dataURI = canvas.toDataURL();
                 //     imagesave.src = dataURI;
             });
@@ -84,7 +120,14 @@
             //     const dataURI = canvas.toDataURI();
             //     imagesave.src = dataURI;
             // });
-            
+            function submit(id)
+            {
+                var imagedv = document.createElement("INPUT");
+                imagedv.setAttribute('type', 'hidden');
+                imagedv.setAttribute('value', id);
+                
+            }
+
         </script>
 
 </body>

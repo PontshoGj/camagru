@@ -1,41 +1,13 @@
 <?php
-    $retrive = array();
-    foreach($_POST as $key => $value)
-        $retrive[$key] = $value;
-    if ($retrive["image"]) {
-        $reimage = explode(",", $retrive['image']);
-        $encodedData = str_replace(' ','+',$reimage[1]);
-        $decodedData = base64_decode($encodedData);
-        $fp = fopen("canvas.jpeg", 'wb');
-        fwrite($fp, $decodedData);
-        fclose();
-        switch($retrive['rad']){
-            case "ballon":
-                $srcImg = imagecreatefrompng('ballons.png');
-                $destImg = imagecreatefrompng('canvas.ping');
-                if (imagecopymerge($destImg, $srcImg, 0, 0, 0, 0, 640, 480, 100))
-                {
-                    header('Content-Type: image/png');
-                    imagepng($destImg, 'meg.png');
-                }
-                // imagedestroy($destImg);
-                // imagedestroy($srcImg);                
-                break;
-            case "butterfly":
-                echo "dfg";
-                break;
-            case "vine":
-                echo "cvb";
-                break;
-            case "decor":
-                echo "zsxd";
-                break;
-            default:
-                include_once('./picdb.php');
-                $as = new picdb();
-                $as->tempsave($retrive['image']);
-        }
-    }
+    include_once('./sessionmanagement.php');
+    include_once('picpro.php');
+    if ($_POST['ims'])
+    {
+        include('savimg.php');
+        $ar = new saveimg();
+        $ar->saveimg($_POST['ims'], $_SESSION['username']);
+        header("Location: gallery.php");
+     }
 ?>
 
 <!DOCTYPE html>
@@ -44,41 +16,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Edit</title>
  
 </head>
 <body>
-    <form actio="cam.php" method="post">
+    <div style="float: left; margin-left: 500px;">
+        <form actio="cam.php" method="post">
+            <div class="video-wrap" >
+                <video id="video" playsinline autoplay></video>
+            </div>
 
-        <div class="video-wrap">
-            <video id="video" playsinline autoplay></video>
-        </div>
+                <input type="hidden" value="" id="image" name="image">
+            <div class="controller">
+                <button id="snap" type="submit">Capture</button>
+                bat<input type="radio" id="rad" name="rad" value="bat">
+                glass<input type="radio" id="rad" name="rad" value="glass">
+                tree<input type="radio" id="rad" name="rad" value="tree">
+            </div>
 
-            <input type="hidden" value="" id="image" name="image">
-        <div class="controller">
-            <button id="snap" type="submit">Capture</button>
-            ballon<input type="radio" id="rad" name="rad" value="ballon">
-            butterfly<input type="radio" id="rad" name="rad" value="butterfly">
-            vine<input type="radio" id="rad" name="rad" value="vine">
-            decor<input type="radio" id="rad" name="rad" palceholder="decor">
-        </div>
-
-        <canvas id="canvas" width="640" height="480"></canvas>
-    </form>
-    <div>
+            <canvas id="canvas" width="450" height="450" style="float:left;"></canvas>
+        </form>
+    </div>
+    <div style="float: right; width: 400px; hight: auto;">
+        <form action="cam.php" method="post">
         <?php
             include_once('./picdb.php');
             $arr = new picdb();
             $display = $arr->getsave();
-            //print_r($display);
-            // foreach($display as $key=>$value)
             $i = 0;
             while($i < count($display))
-            { 
-                echo '<img src="'.$display[$i++]['images'].'">';
+            {
+                echo '<button id="s" name="ims" value="'.$display[$i]['images'].'"><img src="'.$display[$i]['images'].'" style="width: 100px; hight: 100px;" ></button>';
+                $i++;
             } 
         ?>
+        </form>
     </div>
+        <a href="logout.php">logout.php</a>
 
     <div>
         <button id="save" style="display: none;">Save</button>
@@ -92,12 +66,10 @@
             const canvas = document.getElementById('canvas');
             const snap = document.getElementById('snap');
             const image = document.getElementById("image");
-            // const imagesave = document.getElementById("saveimage");
             const errorMsgElement = document.getElementById('span#ErrorMsg');
             const constraints = {
-                audio: true,
                 video:{
-                    width: 1280, height: 720
+                    width: 450, height: 450
                 }
             };
             async function init()
@@ -116,38 +88,12 @@
             init();
             var context = canvas.getContext('2d');
             snap.addEventListener("click", function(){
-                context.drawImage(video, 0, 0, 640, 480);
-                // document.getElementById("video").style.display = "none";
-                // document.getElementById("snap").style.display = "none";
-                // let stream2 = video.srcObject;
-                // let tracks = stream2.getTracks();
-                // tracks.forEach(function(track){
-                //     track.stop();
-                // });
+                context.drawImage(video, 0, 0, 450, 450);
                 const dataURI = canvas.toDataURL();
-                //imagesave.src = dataURI;
                 image.setAttribute('value', dataURI);
-                // if (!document.getElementById('imagediv'))
-                // {
-                //     var imagedv = document.createElement("div");
-                //     // imagedv.setAttribute('id', 'imagediv');
 
-                // }else{
-                //     const imagedv = document.getElementById("imagediv");
-                // }
-
-                //     const dataURI = canvas.toDataURL();
-                //     imagesave.src = dataURI;
             });
 
-            // const btndisplay = document.querySelector("#save");
-            // const imagesave = document.querySelector("#saveimage");
-
-            // btndisplay.addEventListener('click', function(){
-            //     const dataURI = canvas.toDataURI();
-            //     imagesave.src = dataURI;
-            // });
-            
         </script>
 
 </body>

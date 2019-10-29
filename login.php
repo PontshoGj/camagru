@@ -1,16 +1,18 @@
 
 <?php
     session_start();
-    include('./userauth.php');
+    include_once('./userauth.php');
     $retrive = array();
     $not_val = "";
     foreach($_POST as $key => $value)
         $retrive[$key] = $value;
     if ($retrive["username"] && $retrive["password"] && $retrive["submit"]) {
         $va = new userauth();
+        echo $va->checklogin($retrive['username'], $retrive['password']);
         if ($va->checklogin($retrive['username'], $retrive['password'])){
-            $_SESSION['username'] = $va->getuserid2($retrive["username"]);
-            header("location: gallery.php");
+            $val = $va->getuserid($retrive["username"]);
+            $_SESSION['username'] = $val[0]['userid'];
+            header("Location: gallery.php");
         }
         else{
             $not_val = "incorect username or password";

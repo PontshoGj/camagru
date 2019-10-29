@@ -1,5 +1,5 @@
 <?php
-    include("./userauth.php");
+    include_once("./userauth.php");
     $retrive = array();
     $not_val = "";
     foreach($_POST as $key => $value)
@@ -7,7 +7,6 @@
     if ($retrive["email"] && $retrive["submit"]) {
         $va = new userauth();
         if ($va->passwordreset($retrive["email"])){
-            echo "bbb";
             $not_val = "Password reset email is sent to your account";
         }
     }
