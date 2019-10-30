@@ -12,7 +12,7 @@
         if ($va->checklogin($retrive['username'], $retrive['password'])){
             $val = $va->getuserid($retrive["username"]);
             $_SESSION['username'] = $val[0]['userid'];
-            header("Location: gallery.php");
+            header("Location: publicgallery.php");
         }
         else{
             $not_val = "incorect username or password";

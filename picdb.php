@@ -47,6 +47,20 @@ class picdb{
             echo "Selection failed: " . $e->getMessage();
         }
     }
+    public function getalluser($userid)
+    {
+        try{
+            $sql = 'SELECT * FROM userimage WHERE userid = :userid';
+            $stmt = $this->co->prepare($sql);
+            $stmt->bindParam(':userid', $userid);
+            $stmt->execute();
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
+        }catch (PDOException $e)
+        {
+            echo "Selection failed: " . $e->getMessage();
+        }
+    }
 
     public function __distruct()
     {

@@ -16,7 +16,7 @@
         <?php
             include_once('./picdb.php');
             $arr = new picdb();
-            $display = $arr->getall();
+            $display = $arr->getalluser($_SESSION["username"]);
             $i = 0;
             while($i < count($display))
             {
@@ -29,6 +29,7 @@
     <a href="cam.php">cam</a>
     <a href="logout.php">logout</a>
     <a href="upload.php">upload</a>
+    <a href="edituser.php">edituser</a>
     </div>
 </body>
 </html>

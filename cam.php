@@ -6,6 +6,7 @@
         include('savimg.php');
         $ar = new saveimg();
         $ar->saveimg($_POST['ims'], $_SESSION['username']);
+        $s = shell_exec('rm merge.png');
         header("Location: gallery.php");
     }
 ?>
