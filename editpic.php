@@ -1,9 +1,14 @@
 <?php
-  
         switch($retrive['rad']){
             case "bat":
-                
-                $image1 = $fileNameNew;
+                $list = scandir('./');
+                $i = 0;
+                while($i < count($list))
+                {
+                    if (preg_match('/merge\.[A-Za-z]{3,}/', $list[$i]))
+                        $image1 = $list[$i];
+                    $i++;
+                }
                 $image2 = 'bat.png';
 
                 list($width, $height) = getimagesize($image2);
@@ -17,12 +22,21 @@
                 $data = file_get_contents('merge.png');
                 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
-                include_once('./picdb.php');
-                $as = new picdb();
-                $as->tempsave($base64);             
+                include('savimg.php');
+                $ar = new saveimg();
+                $ar->saveimg($base64, $_SESSION['username']);
+                $s = shell_exec('rm merge.png');
+                header("Location: gallery.php");             
                 break;
             case "glass":
-                $image1 = $fileNameNew;
+                $list = scandir('./');
+                $i = 0;
+                while($i < count($list))
+                {
+                    if (preg_match('/merge\.[A-Za-z]{3,}/', $list[$i]))
+                        $image1 = $list[$i];
+                    $i++;
+                }
                 $image2 = 'glass2.png';
 
                 list($width, $height) = getimagesize($image2);
@@ -36,12 +50,21 @@
                 $data = file_get_contents('merge.png');
                 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
-                include_once('./picdb.php');
-                $as = new picdb();
-                $as->tempsave($base64);                 
+                include('savimg.php');
+                $ar = new saveimg();
+                $ar->saveimg($base64, $_SESSION['username']);
+                $s = shell_exec('rm merge.png');
+                header("Location: gallery.php");                
                 break;
             case "tree":
-                $image1 = $fileNameNew;
+                $list = scandir('./');
+                $i = 0;
+                while($i < count($list))
+                {
+                    if (preg_match('/merge\.[A-Za-z]{3,}/', $list[$i]))
+                        $image1 = $list[$i];
+                    $i++;
+                }                
                 $image2 = 'tree.png';
 
                 list($width, $height) = getimagesize($image2);
@@ -55,13 +78,27 @@
                 $data = file_get_contents('merge.png');
                 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
-                include_once('./picdb.php');
-                $as = new picdb();
-                $as->tempsave($base64);                 
+                include('savimg.php');
+                $ar = new saveimg();
+                $ar->saveimg($base64, $_SESSION['username']);
+                $s = shell_exec('rm merge.png');
+                header("Location: gallery.php");                 
                 break;
             default:
-                include_once('./picdb.php');
-                $as = new picdb();
-                $as->tempsave($base64);
+                $list = scandir('./');
+                $i = 0;
+                while($i < count($list))
+                {
+                    if (preg_match('/merge\.[A-Za-z]{3,}/', $list[$i]))
+                        $image1 = $list[$i];
+                    $i++;
+                } 
+                $data = file_get_contents($image1);
+                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                include('savimg.php');
+                $ar = new saveimg();
+                $ar->saveimg($base64, $_SESSION['username']);
+                $s = shell_exec('rm merge.png');
+                header("Location: gallery.php");
         }
 ?>

@@ -46,8 +46,6 @@
         }
     }
     if (isset($_POST['merge'])){
-        $data = file_get_contents('merge.'.$fileAxtualExt);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         include("editpic.php");
     }
 ?>
@@ -70,10 +68,11 @@
     <div class="controller" id="<?php echo $display; ?>" style="display: none;">
         <form action="./upload.php" method="POST" enctype="multipart/form-data">
             <div>
-                <img id="dimage" src="<?php echo $base64; ?>" value="<?php echo $base64; ?>" style="width: 450px;hight: 450px;">
+                <img id="dimage"  src="<?php echo $base64; ?>"  style="width: 450px;hight: 450px;">
                 bat<input type="radio" id="rad" name="rad" value="bat">
                 glass<input type="radio" id="rad" name="rad" value="glass">
                 tree<input type="radio" id="rad" name="rad" value="tree">
+                <!-- <input type="hidden" value="<?php echo $base64; ?>" name="dimage"> -->
                 <button type="submit" name="merge">Upload</button>
             </div>
         </form>

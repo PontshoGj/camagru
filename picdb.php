@@ -34,6 +34,19 @@ class picdb{
             echo "Selection failed: " . $e->getMessage();
         }
     }
+    public function getall()
+    {
+        try{
+            $sql = 'SELECT * FROM userimage';
+            $stmt = $this->co->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
+        }catch (PDOException $e)
+        {
+            echo "Selection failed: " . $e->getMessage();
+        }
+    }
 
     public function __distruct()
     {

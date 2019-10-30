@@ -1,5 +1,6 @@
 <?php
     include_once('./sessionmanagement.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +12,23 @@
     <title>Gallery</title>
 </head>
 <body>
+    <div>
+        <?php
+            include_once('./picdb.php');
+            $arr = new picdb();
+            $display = $arr->getall();
+            $i = 0;
+            while($i < count($display))
+            {
+                echo '<div><img src="'.$display[$i]['images'].'" style="width: 450px; hight: 450px; margin-left: 450px;" ><div>';
+                $i++;
+            } 
+        ?>
+    </div>
+    <div>
     <a href="cam.php">cam</a>
     <a href="logout.php">logout</a>
+    <a href="upload.php">upload</a>
+    </div>
 </body>
 </html>
