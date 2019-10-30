@@ -92,6 +92,7 @@
         /* send email to the user if the $username||$email provided is correct */
         public function passwordreset($email)
         {
+
             $selec = bin2hex(random_bytes(8));
             $token = bin2hex(random_bytes(32));
 
@@ -131,7 +132,6 @@
             $selec = bin2hex(random_bytes(32));
 
             $url = "http://www.localhost:8080/camagru/conf.php?selec=".$selec;
-            $exp = date("U") + 1800;
             $to = $email;
             $subject = "Email confirmation link";
 
@@ -140,19 +140,18 @@
             $headers .= "Content-type: text/html\r\n";
             if (mail($to,$subject, $message,$headers))
             {
-                $val = $this->getuserid($email);
-                try{
-                    $sql = 'INSERT INTO emailconfirm (userid, selec)
-                            VALUES ( :userid, :selec)';
-                    $aa = $this->conns->prepare($sql);
-        
-                    $aa->bindParam(':userid', $val[0]['userid']);
-                    $aa->bindParam(':selec', $selec);
-                    $aa->execute();
-                }catch (PDOException $e)
-                {
-                    echo $sql . "<br>" . $e->getMessage() . "\n";
-                }
+                $val = $va->getuserid($email);
+                // try{
+                //     $sql = 'INSERT INTO emailconfirm (userid, selec)
+                //             VALUES ( :userid, :selec)';
+                //     $aa = $this->conns->prepare($sql);
+                //     $aa->bindParam(':userid', $val[0]['userid']);
+                //     $aa->bindParam(':selec', $selec);
+                //     $aa->execute();
+                // }catch (PDOException $e)
+                // {
+                //     echo $sql . "<br>" . $e->getMessage() . "\n";
+                // }
             }
         }
 

@@ -14,7 +14,6 @@
             $reg = new usermanagment();
             $reg->setdata($array['username'], $array['name'], $array['email'], $array['password']);
             $reg->adduser();
-            echo "ss";
             header("location: login.php");
         }
     }

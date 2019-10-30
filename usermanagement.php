@@ -38,7 +38,6 @@
             {
                 echo $sql . "<br>" . $e->getMessage() . "\n";
             }
-            echo "fff";
             $confirm = new userauth();
             $confirm->emailconfo($this->emails);
         }

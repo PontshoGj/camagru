@@ -36,11 +36,11 @@
                 </form>
             </div>
             <div>
-                <p> <a href="./login.html">Login</a></p>
+                <p> <a href="./login.php">Login</a></p>
             </div>
         </div>
         <div class="box-2">
-            <p>Don't have an account? <a href="registration.html">Sign up</a></p>
+            <p>Don't have an account? <a href="registration.php">Sign up</a></p>
         </div>
     </div>
 
