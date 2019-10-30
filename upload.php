@@ -1,4 +1,10 @@
 <?php
+    include_once('./sessionmanagement.php');
+    $retrive = array();
+    $display = "";
+    $displayhd = "";
+    foreach($_POST as $key => $value)
+        $retrive[$key] = $value;
     if (isset($_POST['submit'])){
         $file = $_FILES['file'];
 
@@ -19,9 +25,16 @@
             {
                 if ($fileSize < 1000000)
                 {
-                    $fileNameNew = uniqid('', true).".".$fileAxtualExt;
+                    $fileNameNew = "merge.".$fileAxtualExt;
                     $filedest = "./".$fileNameNew;
                     move_uploaded_file($fileTmpName, $filedest);
+                    $display = "hidden";
+                    $displayhd = "hid";
+                    $data = file_get_contents('merge.'.$fileAxtualExt);
+                    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    // echo $base64;
+                    // header("Location: editpic.php");
+
                 }else{
                     echo "file too big";
                 }
@@ -32,7 +45,11 @@
             echo "can not upload file";
         }
     }
-    
+    if (isset($_POST['merge'])){
+        $data = file_get_contents('merge.'.$fileAxtualExt);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        include("editpic.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -44,10 +61,27 @@
     <title>Gallery</title>
 </head>
 <body>
-    <form action="./upload.php" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <button type="submit" name="submit">Upload</button>
-    </form>
+    <div id="<?php echo $displayhd; ?>">
+        <form action="./upload.php" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <button type="submit" name="submit">Upload</button>
+        </form>
+    </div>
+    <div class="controller" id="<?php echo $display; ?>" style="display: none;">
+        <form action="./upload.php" method="POST" enctype="multipart/form-data">
+            <div>
+                <img id="dimage" src="<?php echo $base64; ?>" value="<?php echo $base64; ?>" style="width: 450px;hight: 450px;">
+                bat<input type="radio" id="rad" name="rad" value="bat">
+                glass<input type="radio" id="rad" name="rad" value="glass">
+                tree<input type="radio" id="rad" name="rad" value="tree">
+                <button type="submit" name="merge">Upload</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("hidden").style.display = "initial";
+        document.getElementById("hid").style.display = "none";
+    </script>
      <a href="logout.php">logout</a>
 </body>
 </html>

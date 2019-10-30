@@ -7,7 +7,7 @@
         $ar = new saveimg();
         $ar->saveimg($_POST['ims'], $_SESSION['username']);
         header("Location: gallery.php");
-     }
+    }
 ?>
 
 <!DOCTYPE html>
