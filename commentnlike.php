@@ -23,5 +23,21 @@ class commentnlike{
             echo $sql . "<br>" . $e->getMessage() . "\n";
         }
     }
+
+    public function addlike($useridown, $userid)
+    {
+        try{
+            $sql = 'INSERT INTO likes (userid, useridown, timess)
+                    VALUES ( :userid, :useridown, :timess)';
+            $aa = $this->conns->prepare($sql);
+            $aa->bindParam(':userid', $userid);
+            $aa->bindParam(':useridown', $useridown);
+            $aa->bindParam(':timess', date("U"));
+            $aa->execute();
+        }catch (PDOException $e)
+        {
+            echo $sql . "<br>" . $e->getMessage() . "\n";
+        }
+    }
 }
 ?>

@@ -12,6 +12,15 @@
             $ad = new commentnlike();
             $ad->addcomment($retrive['comment'], $_SESSION['username'], $retrive['userid']);
         }
+
+    }elseif ($_SESSION["username"] && $retrive['like'])
+    {
+        if($retrive['like'] && $_SESSION['username'])
+        {
+            include('commentnlike.php');
+            $ad = new commentnlike();
+            $ad->addlike($_SESSION['username'], $retrive['like']);
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -42,7 +51,7 @@
                 if($_SESSION['username'])
                 {
                     echo '<div id="'.$display[$i]['timess'].'"><button id="'.$display[$i]['timess'].'" onclick="displays('.$display[$i]['num'].','.$display[$i]['timess'].' )">comment</button>';
-                    echo '<form action="publicgallery.php" method="post"><button id="'.$display[$i]['timess'].'" type="submit" value="'.$display[$i]['num'].'">like</button></form></div><br/>';
+                    echo '<form action="publicgallery.php" method="post"><button id="'.$display[$i]['timess'].'" type="submit" name="like" value="'.$display[$i]['userid'].'">like</button></form></div><br/>';
 
                     echo '<div id="'.$display[$i]['num'].'" style="display:none;"><form action="publicgallery.php" method="post"><textarea name="comment"  id="'.$display[$i]['num'].'" rows="4" cols="50"></textarea>';
                     echo '<input type="hidden" name="userid" value="'.$display[$i]['userid'].'">';
