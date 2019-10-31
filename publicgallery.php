@@ -13,7 +13,6 @@
         {
             document.getElementById($val).style.display = "initial";
             document.getElementById($datess).style.display = "none";
-            document.getElementById($datess + 1).style.display = "none";
         }
     </script>
 </head>
@@ -27,12 +26,15 @@
             while($i < count($display))
             {
                 echo '<div style="width: 450px; hight: 450px; margin-left: 450px; margin-bottom: 30px;"><div><img src="'.$display[$i]['images'].'" style="width: 450px; hight: 450px;"></div>';
+                if(!($display[$i]['userid'] === $_SESSION['username']))
+                {
+                    echo '<div id="'.$display[$i]['timess'].'"><button id="'.$display[$i]['timess'].'" onclick="displays('.$display[$i]['num'].','.$display[$i]['timess'].' )">comment</button>';
+                    echo '<form><button id="'.$display[$i]['timess'].'" type="submit" value="'.$display[$i]['num'].'">like</button></form></div><br/>';
 
-                echo '<div id="'.$display[$i]['timess'].'"><button id="'.$display[$i]['timess'].'" onclick="displays('.$display[$i]['num'].','.$display[$i]['timess'].' )">comment</button>';
-                echo '<form><button id="'.$display[$i]['timess'].'" type="submit" value="'.$display[$i]['num'].'">like</button></form></div><br/>';
-
-                echo '<div id="'.$display[$i]['num'].'" style="display:none;"><form><textarea id="'.$display[$i]['num'].'" rows="4" cols="50"></textarea>';
-                echo '<button type="submit" value="comment" id="'.$display[$i]['num'].'">comment</button></form></div></div>';
+                    echo '<div id="'.$display[$i]['num'].'" style="display:none;"><form><textarea value="'.$display[$i]['userid'].'" id="'.$display[$i]['num'].'" rows="4" cols="50"></textarea>';
+                    echo '<button type="submit" value="comment" id="'.$display[$i]['num'].'">comment</button></form></div>';
+                }
+                echo '</div>';
                 $i++;
             } 
         ?>

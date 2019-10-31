@@ -6,7 +6,7 @@
         /* connecting to the database */
         function __construct()
         {
-            include_once('./connection.php');
+            include('./connection.php');
             $this->conns = $conn;
         }
 
@@ -137,21 +137,21 @@
 
             $message =  "The link to comfirm your email\n";
             $message .= '<a href="'. $url . '">'. $url.'</a>';
-            $headers .= "Content-type: text/html\r\n";
+            $headers = "Content-type: text/html\r\n";
             if (mail($to,$subject, $message,$headers))
             {
-                $val = $va->getuserid($email);
-                // try{
-                //     $sql = 'INSERT INTO emailconfirm (userid, selec)
-                //             VALUES ( :userid, :selec)';
-                //     $aa = $this->conns->prepare($sql);
-                //     $aa->bindParam(':userid', $val[0]['userid']);
-                //     $aa->bindParam(':selec', $selec);
-                //     $aa->execute();
-                // }catch (PDOException $e)
-                // {
-                //     echo $sql . "<br>" . $e->getMessage() . "\n";
-                // }
+                $val = $this->getuserid($email);
+                try{
+                    $sql = 'INSERT INTO emailconfirm (userid, selec)
+                            VALUES ( :userid, :selec)';
+                    $aa = $this->conns->prepare($sql);
+                    $aa->bindParam(':userid', $val[0]['userid']);
+                    $aa->bindParam(':selec', $selec);
+                    $aa->execute();
+                }catch (PDOException $e)
+                {
+                    echo $sql . "<br>" . $e->getMessage() . "\n";
+                }
             }
         }
 

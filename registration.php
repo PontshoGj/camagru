@@ -1,6 +1,9 @@
 <?php
     require_once("./usermanagement.php");
     require_once("./userauth.php");
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     $array = array();
     foreach($_POST as $key => $value)
         $array[$key] = $value;
