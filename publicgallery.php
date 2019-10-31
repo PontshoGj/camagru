@@ -1,5 +1,18 @@
 <?php
     session_start();
+    $retrive = array();
+    $not_val = "";
+    foreach($_POST as $key => $value)
+        $retrive[$key] = $value;
+    if ($_SESSION["username"]  && $retrive['submit'])
+    {
+        if($retrive['comment'] && $retrive['userid'] && $_SESSION['username'])
+        {
+            include('commentnlike.php');
+            $ad = new commentnlike();
+            $ad->addcomment($retrive['comment'], $_SESSION['username'], $retrive['userid']);
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,13 +39,14 @@
             while($i < count($display))
             {
                 echo '<div style="width: 450px; hight: 450px; margin-left: 450px; margin-bottom: 30px;"><div><img src="'.$display[$i]['images'].'" style="width: 450px; hight: 450px;"></div>';
-                if(!($display[$i]['userid'] === $_SESSION['username']))
+                if($_SESSION['username'])
                 {
                     echo '<div id="'.$display[$i]['timess'].'"><button id="'.$display[$i]['timess'].'" onclick="displays('.$display[$i]['num'].','.$display[$i]['timess'].' )">comment</button>';
-                    echo '<form><button id="'.$display[$i]['timess'].'" type="submit" value="'.$display[$i]['num'].'">like</button></form></div><br/>';
+                    echo '<form action="publicgallery.php" method="post"><button id="'.$display[$i]['timess'].'" type="submit" value="'.$display[$i]['num'].'">like</button></form></div><br/>';
 
-                    echo '<div id="'.$display[$i]['num'].'" style="display:none;"><form><textarea value="'.$display[$i]['userid'].'" id="'.$display[$i]['num'].'" rows="4" cols="50"></textarea>';
-                    echo '<button type="submit" value="comment" id="'.$display[$i]['num'].'">comment</button></form></div>';
+                    echo '<div id="'.$display[$i]['num'].'" style="display:none;"><form action="publicgallery.php" method="post"><textarea name="comment"  id="'.$display[$i]['num'].'" rows="4" cols="50"></textarea>';
+                    echo '<input type="hidden" name="userid" value="'.$display[$i]['userid'].'">';
+                    echo '<button type="submit" value="comment" id="'.$display[$i]['num'].'" name="submit">comment</button></form></div>';
                 }
                 echo '</div>';
                 $i++;
@@ -45,7 +59,7 @@
         {
             echo '<a href="gallery.php">Profile</a> ';
             echo '<a href="logout.php">logout</a>';
-            echo $_SESSION["username"];
+            // echo $_SESSION["username"];
         }else
         {
             echo '<a href="login.php">login</a> ';

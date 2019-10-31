@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gallery</title>
+    <title>Profile</title>
 </head>
 <body>
     <div>
@@ -30,6 +30,7 @@
     <a href="logout.php">logout</a>
     <a href="upload.php">upload</a>
     <a href="edituser.php">edituser</a>
+    <a href="publicgallery.php">public</a>
     </div>
 </body>
 </html>

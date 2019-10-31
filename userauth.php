@@ -4,7 +4,7 @@
         private $conns;
 
         /* connecting to the database */
-        function __construct()
+        public function __construct()
         {
             include('./connection.php');
             $this->conns = $conn;
