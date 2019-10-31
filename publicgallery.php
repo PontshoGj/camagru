@@ -12,10 +12,9 @@
         if($retrive['comment'] && $retrive['userid'] && $_SESSION['username'] && $retrive['imagenu'])
         {
             include_once('commentnlike.php');
-            $email = $ad->getuserid2($_SESSION['username']);
             $ad = new commentnlike();
             $ad->addcomment($retrive['comment'], $_SESSION['username'], $retrive['userid'], $retrive['imagenu']);
-            $ad->emailcomment($_SESSION['username']);
+            $ad->emailcomment($_SESSION['username'], 'comment');
             unset($ad);
         }
     }elseif ($_SESSION["username"] && $retrive['like'])
@@ -25,7 +24,7 @@
             include_once('commentnlike.php');
             $ad = new commentnlike();
             $ad->addlike($_SESSION['username'], $retrive['like'], $retrive['imagenu']);
-            $ad->emailcomment($_SESSION['username']);
+            $ad->emailcomment($_SESSION['username'], 'like');
             unset($ad);
         }
     }

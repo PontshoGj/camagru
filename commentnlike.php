@@ -72,7 +72,7 @@ class commentnlike{
         }
     }
 
-    public function emailcomment($userid)
+    public function emailcomment($userid, $kind)
     {
         try{
             $sql = 'SELECT * FROM users WHERE userid = :userid';
@@ -86,9 +86,17 @@ class commentnlike{
             echo $sql . "<br>" . $e->getMessage();
         }
         $to = $user[0]['email'];
-        $subject = "Someone commented on your image";
-
-        $message =  "the image commented on\n";
+        switch($kind)
+        {
+            case 'comment':
+                $subject = "Someone commented on your image";
+                $message =  "Someone commented on your image\n";
+                break;
+            case 'like':
+                $subject = "Someone liked your image";
+                $message =  "Someone liked your image\n";
+                break;
+        }
         $headers = "Content-type: text\r\n";
         mail($to,$subject, $message,$headers);
 
