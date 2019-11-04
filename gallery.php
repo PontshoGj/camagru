@@ -1,6 +1,5 @@
 <?php
     include_once('./sessionmanagement.php');
-
 ?>
 
 <!DOCTYPE html>
