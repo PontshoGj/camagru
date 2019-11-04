@@ -8,28 +8,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/publicgallery.css">
     <title>Profile</title>
 </head>
 <body>
+    <div class="header">
+        <ul>
+            <?php
+                include('./nav.php');
+            ?>
+        </ul>
+    </div>
     <div>
         <?php
-            include_once('./picdb.php');
-            $arr = new picdb();
-            $display = $arr->getalluser($_SESSION["username"]);
-            $i = 0;
-            while($i < count($display))
-            {
-                echo '<div><img src="'.$display[$i]['images'].'" style="width: 450px; hight: 450px; margin-left: 450px;" ><div>';
-                $i++;
-            } 
+            include('./gallerydisplyimg.php');
         ?>
     </div>
-    <div>
-    <a href="cam.php">cam</a>
-    <a href="logout.php">logout</a>
-    <a href="upload.php">upload</a>
-    <a href="edituser.php">edituser</a>
-    <a href="publicgallery.php">public</a>
-    </div>
+
 </body>
 </html>

@@ -17,10 +17,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/publicgallery.css">
     <title>Edit</title>
  
 </head>
 <body>
+    <div class="header">
+        <ul>
+            <?php
+                include('./nav.php');
+            ?>
+        </ul>
+    </div>    
     <div style="float: left; margin-left: 500px;">
         <form actio="cam.php" method="post">
             <div class="video-wrap" >
@@ -52,10 +60,6 @@
             } 
         ?>
         </form>
-    </div>
-        <a href="logout.php">logout.php</a>
-
-    <div>
         <button id="save" style="display: none;">Save</button>
     </div>
     <!-- <div id="imagediv">

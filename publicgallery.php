@@ -21,17 +21,7 @@
     <div class="header">
         <ul>
             <?php
-                if ($_SESSION["username"])
-                {
-                    echo '<li><a href="gallery.php">Profile</a></li>';
-                    echo '<li><a href="logout.php">logout</a></li>';
-                    echo '<li><a href="publicgallery.php">public</a></li>';
-            // echo $_SESSION["username"];
-                }else
-                {
-                    echo '<li><a href="login.php">login</a></li> ';
-                    echo '<li><a href="registration.php">Register</a></li>';
-                }
+                include('./nav.php');
             ?>
         </ul>
     </div>
