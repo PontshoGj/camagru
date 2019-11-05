@@ -21,9 +21,7 @@
     <?php
         include('./nav.php');
     ?>
-    <div>
-        <?php include('./publicgallerydisplayimg.php'); ?>
-    </div>
+    <?php include('./publicgallerydisplayimg.php'); ?>
 
 </body>
 </html>

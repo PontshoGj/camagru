@@ -13,7 +13,7 @@
             $jj = 0;
             while($i < count($display) && $jj < 5)
             {
-                echo '<div style="margin-left:5vw; margin-right: 1vw; float: left; margin-bottom: 30px;"><div><img src="'.$display[$i]['images'].'" style="width: 250px; hight: 250px;"></div>';
+                echo '<div style="margin-left:5vw; margin-right: 1vw; float: left; margin-bottom: 30px;"><div><img src="'.$display[$i]['images'].'" width="250px" height="250px"></div>';
                 if($_SESSION['username'])
                 {
                     $lik = count($hold->getlikes($display[$i]['num']));
@@ -40,14 +40,16 @@
                 $i++;
                 $jj++;
             }
+            echo '<div class="bl">';
             if (count($display) > $i)
             {
-                echo '<div><form method="post"><input type="hidden" name="next" value="'.$i.'"><button type="submit" value="next"  name="submit">next</button></form>';
+                echo '<div style="float: left;"><form method="post"><input type="hidden" name="next" value="'.$i.'"><button type="submit" value="next"  name="submit">next</button></form></div>';
                 if ($i > 5)
-                    echo '<form method="post"><input type="hidden" name="back" value="'.$i.'"><button type="submit" value="back" name="submit">back</button></form></div>';
+                    echo '<div style="float: left;"><form method="post"><input type="hidden" name="back" value="'.$i.'"><button type="submit" value="back" name="submit">back</button></form></div>';
 
             }else{
-                echo '<form method="post"><input type="hidden" name="back" value="'.$i.'"><button type="submit" value="back" name="submit">back</button></form></div>';
+                echo '<div style="float: left;"><form method="post"><input type="hidden" name="back" value="'.$i.'"><button type="submit" value="back" name="submit">back</button></form></div>';
             }
+            echo '</div>';
             unset($hold); 
 ?>

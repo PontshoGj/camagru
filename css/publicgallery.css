@@ -32,6 +32,10 @@
     margin-left: 40px;
     float: left;
   }
+
+  .bl{
+    margin: 5vw;
+  }
   /* .container ul li:hover{
     background-color: blue;
   }
