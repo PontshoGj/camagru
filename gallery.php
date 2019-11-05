@@ -12,15 +12,9 @@
     <title>Profile</title>
 </head>
 <body>
-    <?php
-        include('./nav.php');
-    ?>
-    </div>
-    <div>
-        <?php
-            include('./gallerydisplyimg.php');
-        ?>
-    </div>
+    <?php include('./nav.php'); ?>
+    <?php include('./gallerydisplyimg.php'); ?>
+    <?php include('./footer.php'); ?>
 
 </body>
 </html>

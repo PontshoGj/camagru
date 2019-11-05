@@ -9,9 +9,7 @@
     background-color: blueviolet;
     list-style: none;
 }
-  /* .header ul{
-    list-style: none;
-  } */
+
   
 .header ul li{
     width: 150px;
@@ -22,7 +20,7 @@
     text-align: center;
     float: left;
     color: white;
-    font-size: 19px;
+    font-size: 50vh;
     position: relative;
   }
 
@@ -36,18 +34,16 @@
   .bl{
     margin: 5vw;
   }
-  /* .container ul li:hover{
-    background-color: blue;
-  }
-  
-  .container ul ul{
-    display: none;
-  }
-  .container ul li:hover > ul{
-    display: block;
-  }
-  .container ul ul ul{
-    margin-left: 150px;
-    top: 0px;
-    position: absolute;
-  } */
+
+  .footer{
+    width: 100vw;
+    height: 4vh;
+    margin-top: 90vh;
+    background-color: blueviolet;
+}
+  .footer2{
+    width: 100vw;
+    height: 4vh;
+    margin-top: 81vh;
+    background-color: blueviolet;
+}

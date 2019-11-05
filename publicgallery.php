@@ -18,10 +18,9 @@
     </script>
 </head>
 <body>
-    <?php
-        include('./nav.php');
-    ?>
+    <?php include('./nav.php'); ?>
     <?php include('./publicgallerydisplayimg.php'); ?>
+    <?php include('./footer.php'); ?>
 
 </body>
 </html>

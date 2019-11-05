@@ -21,7 +21,7 @@
         $jj = 0;
         while($i < count($display) && $jj < 5)
         {
-            echo '<div style="margin-left:5vw; margin-right: 1vw; float: left; margin-bottom: 30px;"><div><img src="'.$display[$i]['images'].'" width="250px" height="250px"></div></div>';            
+            echo '<div style="margin-left:5vw; margin-right: 1vw; float: left; margin-bottom: 30px;"><div><img src="'.$display[$i]['images'].'" width="200vw" height="200vh"></div></div>';            
             $i++;
             $jj++;
         }

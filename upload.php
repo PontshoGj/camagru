@@ -12,9 +12,7 @@ include('./upload2.php');
     <title>Gallery</title>
 </head>
 <body>
-    <?php
-        include('./nav.php');
-    ?>   
+    <?php include('./nav.php'); ?>   
     <div id="<?php echo $displayhd; ?>">
         <form action="./upload.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="file">
@@ -37,6 +35,6 @@ include('./upload2.php');
         document.getElementById("hidden").style.display = "initial";
         document.getElementById("hid").style.display = "none";
     </script>
-     <a href="logout.php">logout</a>
+    <?php include('./footer2.php'); ?>
 </body>
 </html>

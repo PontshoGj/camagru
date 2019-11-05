@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/publicgallery.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Edit</title>
  
 </head>
@@ -43,7 +44,7 @@
         </form>
     </div>
     <div style="float: right; width: 400px; hight: auto;">
-        <form action="cam.php" method="post">
+        <form id="myForm" action="cam.php" method="post">
         <?php
             include_once('./picdb.php');
             $arr = new picdb();
@@ -51,13 +52,14 @@
             $i = 0;
             while($i < count($display))
             {
-                echo '<button id="s" name="ims" value="'.$display[$i]['images'].'"><img src="'.$display[$i]['images'].'" style="width: 100px; hight: 100px;" ></button>';
+                echo '<img class="w3-button" id="s" onclick="myFunction()" name="ims" src="'.$display[$i]['images'].'"  width=100 height=100 value="'.$display[$i]['images'].'">';
+                echo '<input type="hidden" name="ims" value="'.$display[$i]['images'].'">';
                 $i++;
             } 
         ?>
         </form>
-        <button id="save" style="display: none;">Save</button>
     </div>
+    <?php include('./footer.php'); ?>
     <!-- <div id="imagediv">
          <img src="" id="saveimage" style="float: left; border: 1px solid black; margin-left: 10px;">
     </div> -->
@@ -94,7 +96,9 @@
                 image.setAttribute('value', dataURI);
 
             });
-
+            function myFunction() {
+                document.getElementById("myForm").submit();
+            }
         </script>
 
 </body>
