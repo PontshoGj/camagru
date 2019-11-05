@@ -22,13 +22,9 @@
  
 </head>
 <body>
-    <div class="header">
-        <ul>
-            <?php
-                include('./nav.php');
-            ?>
-        </ul>
-    </div>    
+    <?php
+        include('./nav.php');
+    ?>    
     <div style="float: left; margin-left: 500px;">
         <form actio="cam.php" method="post">
             <div class="video-wrap" >

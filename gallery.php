@@ -12,12 +12,9 @@
     <title>Profile</title>
 </head>
 <body>
-    <div class="header">
-        <ul>
-            <?php
-                include('./nav.php');
-            ?>
-        </ul>
+    <?php
+        include('./nav.php');
+    ?>
     </div>
     <div>
         <?php

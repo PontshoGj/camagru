@@ -12,13 +12,9 @@ include('./upload2.php');
     <title>Gallery</title>
 </head>
 <body>
-    <div class="header">
-        <ul>
-            <?php
-                include('./nav.php');
-            ?>
-        </ul>
-    </div>    
+    <?php
+        include('./nav.php');
+    ?>   
     <div id="<?php echo $displayhd; ?>">
         <form action="./upload.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="file">

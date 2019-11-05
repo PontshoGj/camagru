@@ -18,13 +18,9 @@
     </script>
 </head>
 <body>
-    <div class="header">
-        <ul>
-            <?php
-                include('./nav.php');
-            ?>
-        </ul>
-    </div>
+    <?php
+        include('./nav.php');
+    ?>
     <div>
         <?php include('./publicgallerydisplayimg.php'); ?>
     </div>
