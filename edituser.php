@@ -5,6 +5,7 @@
 
     $array = array();
     $a = "";
+    $ba = "";
     foreach($_POST as $key => $value)
         $array[$key] = $value;
     if ($array['password'] && $array['chkpassword'])
@@ -25,17 +26,8 @@
             $reg->moduserchecked($_SESSION['username'], $array['email'], $array['username']);
         else
             $reg->moduserch($_SESSION['username'], $array['email'], $array['username'], '1');
-
-        // echo "User mod\n";
+        $ba = 'detials updated';
     }
-    // else
-    // {
-    //     if ($array['userid'])
-    //     {
-    //         $reg = new usermanagment();
-    //         $array =    $reg->selectuser($array['userid']);
-    //     }
-    // }
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +52,7 @@
             ?>
             <form action="edituser.php" method="post">
                 <p><h2>Change User Details</h2></p><br/>
+                <p><?php echo $ba; ?> </p>
                 <p><input type="email" name="email" id="email" placeholder="<?php echo $hol[0]['email']; ?>" value="<?php echo $hol[0]['email']; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Invalid email format"></p>
                 <p> <input type="text" name="username" placeholder="<?php echo $hol[0]['username'] ?>" value="<?php echo $hol[0]['username'] ?>" id="username" pattern="[A-Za-z0-9]{6,}"></p>
                 <p><input type="checkbox" name="email_preference"  <?php include('chk.php'); ?> > Receive email Notification?</p><br/>
@@ -70,7 +63,7 @@
         <div>
             <form action="edituser.php" method="POST">
                 <p><h2>Change Password</h2></p><br/>
-                <p><?php echo $a; ?>
+                <p><?php echo $a; ?> </p>
                 <p><input type="password" name="password" id="password"  placeholder=" Change Password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></p>
                 <p><input type="password" name="chkpassword" id="password"  placeholder=" Change Password" required></p><br/>
                 <input type="submit" name="submit" value="reset">
