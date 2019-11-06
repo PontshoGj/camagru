@@ -1,14 +1,4 @@
 <?php
-            // include_once('./picdb.php');
-            // $arr = new picdb();
-            // $display = $arr->getalluser($_SESSION["username"]);
-            // $i = 0;
-            // while($i < count($display))
-            // {
-            //     echo '<div><img src="'.$display[$i]['images'].'" style="width: 450px; hight: 450px; margin-left: 450px;" ><div>';
-            //     $i++;
-            // } 
-
         include_once('./picdb.php');
         $arr = new picdb();
         $display = $arr->getalluser($_SESSION["username"]);

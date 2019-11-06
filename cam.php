@@ -1,4 +1,4 @@
-<?php
+ <?php
     include_once('./sessionmanagement.php');
     include_once('picpro.php');
     if ($_POST['ims'])
@@ -25,7 +25,8 @@
 <body>
     <?php
         include('./nav.php');
-    ?>    
+    ?>   
+    <div style="overflow: auto;"> 
     <div style="float: left; margin-left: 500px;">
         <form actio="cam.php" method="post">
             <div class="video-wrap" >
@@ -58,6 +59,7 @@
             } 
         ?>
         </form>
+    </div>
     </div>
     <?php include('./footer.php'); ?>
     <!-- <div id="imagediv">

@@ -50,7 +50,7 @@
                 $aa = $this->conns->prepare($sql);
                 $aa->bindParam(':userid', $userid);
                 $aa->execute();
-                echo "Record deleted successfully\n";
+                // echo "Record deleted successfully\n";
             }catch (PDOException $e)
             {
                 echo $sql . "<br>" . $e->getMessage();
@@ -58,41 +58,69 @@
         }
         
         /* function to update user information in the database */
-        public function moduser($userid)
-        {   
+        public function moduser($userids, $emails, $username)
+        {
             try{
-                $sql = 'UPDATET users 
-                        SET username = :username
-                        SET firstname = :fullname
-                        SET email = :email
-                        SET passwd = :passwd
+                $sql = 'UPDATE users 
+                        SET username = :username, email = :email
                         WHERE userid = :userid';
-                $aa = $conns->prepare($sql);
-                $aa->bindParam(':username', $this->uname);
-                $aa->bindParam(':firstname', $this->fullname);
-                $aa->bindParam(':email', $this->emails);
-                $aa->bindParam(':passwd', $this->passwd);
-                $aa->bindParam(':userid', $this->userid);
+                $aa = $this->conns->prepare($sql);
+                $aa->bindParam(':username', $username);
+                $aa->bindParam(':email', $emails);
+                $aa->bindParam(':userid', $userids);
                 $aa->execute();
-                echo "Record updated successfully\n";
+                // echo "Record updated successfully\n";
             }catch (PDOException $e)
             {
                 echo $sql . "<br>" . $e->getMessage();
             }
         }
-
+        public function moduserchecked($userids, $emails, $username)
+        {
+            try{
+                $sql = 'UPDATE users 
+                        SET username = :username, email = :email, notif = 1
+                        WHERE userid = :userid';
+                $aa = $this->conns->prepare($sql);
+                $aa->bindParam(':username', $username);
+                $aa->bindParam(':email', $emails);
+                $aa->bindParam(':userid', $userids);
+                $aa->execute();
+                // echo "Record updated successfully\n";
+            }catch (PDOException $e)
+            {
+                echo $sql . "<br>" . $e->getMessage();
+            }
+        }
+        public function moduserch($userids, $emails, $username)
+        {
+            try{
+                $sql = 'UPDATE users 
+                        SET username = :username, email = :email, notif = 0
+                        WHERE userid = :userid';
+                $aa = $this->conns->prepare($sql);
+                $aa->bindParam(':username', $username);
+                $aa->bindParam(':email', $emails);
+                $aa->bindParam(':userid', $userids);
+                $aa->execute();
+                // echo "Record updated successfully\n";
+            }catch (PDOException $e)
+            {
+                echo $sql . "<br>" . $e->getMessage();
+            }
+        }
         /* select all data for user from the database */
-        public function selectuser($userid)
+        public function selectuser($userids)
         {   
             try{
                 $sql = 'SELECT * FROM users
-                        WHERE userid = :usserid';
+                        WHERE userid = :userid';
                 $aa = $this->conns->prepare($sql);
-                $aa->bindParam(':userid', $userid);
+                $aa->bindParam(':userid', $userids);
                 $aa->execute();
-                //echo "Record selected successfully\n";
+                // echo "Record selected successfully\n";
                 $aa->setFetchMode(PDO::FETCH_ASSOC);
-                return ($stmt->fetchAll());
+                return ($aa->fetchAll());
             }catch (PDOException $e)
             {
                 echo $sql . "<br>" . $e->getMessage();

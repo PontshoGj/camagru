@@ -19,7 +19,7 @@
 </head>
 <body>
     <?php include('./nav.php'); ?>
-    <?php include('./publicgallerydisplayimg.php'); ?>
+    <div style="overflow: auto;"><?php include('./publicgallerydisplayimg.php'); ?></div>
     <?php include('./footer.php'); ?>
 
 </body>

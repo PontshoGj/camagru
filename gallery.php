@@ -13,7 +13,7 @@
 </head>
 <body>
     <?php include('./nav.php'); ?>
-    <?php include('./gallerydisplyimg.php'); ?>
+    <div style="overflow: auto;"><?php include('./gallerydisplyimg.php'); ?></div>
     <?php include('./footer.php'); ?>
 
 </body>

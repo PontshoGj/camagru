@@ -12,7 +12,8 @@ include('./upload2.php');
     <title>Gallery</title>
 </head>
 <body>
-    <?php include('./nav.php'); ?>   
+    <?php include('./nav.php'); ?>
+    <div style="overflow: auto; margin-bottom: 5vh;">   
     <div id="<?php echo $displayhd; ?>">
         <form action="./upload.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="file">
@@ -30,6 +31,7 @@ include('./upload2.php');
                 <button type="submit" name="merge">Upload</button>
             </div>
         </form>
+    </div>
     </div>
     <script>
         document.getElementById("hidden").style.display = "initial";

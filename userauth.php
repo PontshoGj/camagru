@@ -266,7 +266,7 @@
                 $stmt->execute();
             }catch (PDOException $e)
             {
-                echo "Selection failed: " . $e->getMessage();
+                echo $e->getMessage();
             }
             return 1;
         }

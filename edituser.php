@@ -1,17 +1,33 @@
 <?php
     include_once('./sessionmanagement.php');
-    // include_once('./usermanagement.php');
+    include_once('./usermanagement.php');
+    include_once('./userauth.php');
 
-    // $array = array();
-    // foreach($_POST as $key => $value)
-    //     $array[$key] = $value;
-    // if ($array['name'] && $array['surname'] && $array['id'] && $array['number'] && $array['submit'] == 'OK')
-    // {
-    //     $reg = new usermanagment();
-    //     $reg->setdata($array['name'], $array['name'], $array['surname'], $array['number'], $array['address'], $array['id']);
-    //     $reg->moduser($userid);
-    //     echo "User mod\n";
-    // }
+    $array = array();
+    $a = "";
+    foreach($_POST as $key => $value)
+        $array[$key] = $value;
+    if ($array['password'] && $array['chkpassword'])
+    {
+        $aa = new userauth();
+        if ($aa->updatepass($array['password'], $_SESSION['username'], $array['chkpassword']))
+        { 
+            $a = 'password updated';
+        }else
+        {
+            $a = "password does not match";
+        }
+    }
+    elseif ($array['email'] && $array['username'] && $array['submit'] == 'Update')
+    {
+        $reg = new usermanagment();
+        if (isset($array['email_preference']))
+            $reg->moduserchecked($_SESSION['username'], $array['email'], $array['username']);
+        else
+            $reg->moduserch($_SESSION['username'], $array['email'], $array['username'], '1');
+
+        // echo "User mod\n";
+    }
     // else
     // {
     //     if ($array['userid'])
@@ -36,6 +52,31 @@
     <?php
         include('./nav.php');
     ?>
+    <div style="overflow: auto;">
+        <div>
+            <?php         
+                $rq = new usermanagment();
+                $hol = $rq->selectuser($_SESSION['username']);
+            ?>
+            <form action="edituser.php" method="post">
+                <p><h2>Change User Details</h2></p><br/>
+                <p><input type="email" name="email" id="email" placeholder="<?php echo $hol[0]['email']; ?>" value="<?php echo $hol[0]['email']; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Invalid email format"></p>
+                <p> <input type="text" name="username" placeholder="<?php echo $hol[0]['username'] ?>" value="<?php echo $hol[0]['username'] ?>" id="username" pattern="[A-Za-z0-9]{6,}"></p>
+                <p><input type="checkbox" name="email_preference"  <?php include('chk.php'); ?> > Receive email Notification?</p><br/>
+                <p><input type="submit" value="Update" name="submit" id="submit"></p>
+            </form>
+        </div>
+        <br/><br/><br/>
+        <div>
+            <form action="edituser.php" method="POST">
+                <p><h2>Change Password</h2></p><br/>
+                <p><?php echo $a; ?>
+                <p><input type="password" name="password" id="password"  placeholder=" Change Password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></p>
+                <p><input type="password" name="chkpassword" id="password"  placeholder=" Change Password" required></p><br/>
+                <input type="submit" name="submit" value="reset">
+            </form>
+        </div>
+    </div>
     <?php
         include('./footer.php');
     ?>
