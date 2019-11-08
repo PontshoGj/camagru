@@ -27,7 +27,7 @@
         include('./nav.php');
     ?>   
     <div style="overflow: auto;"> 
-    <div style="float: left; margin-left: 500px;">
+    <div style="float: left; margin-left: 20vw;">
         <form actio="cam.php" method="post">
             <div class="video-wrap" >
                 <video id="video" playsinline autoplay></video>
@@ -44,7 +44,7 @@
             <canvas id="canvas" width="450" height="450" style="float:left;"></canvas>
         </form>
     </div>
-    <div style="float: right; width: 400px; hight: auto;">
+    <div style="float: right; width: 35vw; hight: auto;">
         <form id="myForm" action="cam.php" method="post">
         <?php
             include_once('./picdb.php');

@@ -23,7 +23,7 @@
                     $sql = 'SELECT * FROM users WHERE username = :uname && passwd = :passwd && OK = :a';
                     $stmt = $this->conns->prepare($sql);
                     $stmt->bindParam(":uname", $uname);
-                    $stmt->bindParam(":passwd", $passwd);
+                    $stmt->bindParam(":passwd", hash('ripemd160',$passwd));
                     $stmt->bindParam(":a", $a);
                     $stmt->execute();
                     $rot = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -40,7 +40,7 @@
                     $sql = 'SELECT * FROM users WHERE email = :uname && passwd = :passwd && OK = :a';
                     $stmt = $this->conns->prepare($sql);
                     $stmt->bindParam(":uname", $uname);
-                    $stmt->bindParam(":passwd", $passwd);
+                    $stmt->bindParam(":passwd", hash('ripemd160',$passwd));
                     $stmt->bindParam(":a", $a);
                     $stmt->execute();
                     $rot = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -55,6 +55,39 @@
         }
 
         /*  */
+        public function getuserid3($uname)
+        {
+
+            if(filter_var($uname, FILTER_VALIDATE_EMAIL)){
+                try{
+                    $sql = 'SELECT userid FROM users WHERE email = :email';
+                    $exe = $this->conns->prepare($sql);
+                    $exe->bindParam(':email', $uname);
+                    $exe->execute();
+                    $val = $exe->setFetchMode(PDO::FETCH_ASSOC);
+                    return ($exe->fetchAll());
+                }catch (PDOException $e)
+                {
+                    echo $sql . "<br>" . $e->getMessage();
+                }
+            }
+            if (preg_match('/[A-Za-z0-9]{6,}/', $uname)){
+                try{
+                    $sql = 'SELECT userid FROM users WHERE username = :username';
+                    $exe = $this->conns->prepare($sql);
+                    $exe->bindParam(':username', $uname);
+                    $exe->execute();
+                    $val = $exe->setFetchMode(PDO::FETCH_ASSOC);
+                    return ($exe->fetchAll());
+                }catch (PDOException $e)
+                {
+                    echo $sql . "<br>" . $e->getMessage();
+                }
+            }
+            return (0);
+        }
+
+
         public function getuserid($email)
         {
             try{
@@ -261,7 +294,7 @@
             try{
                 $sql = "UPDATE users SET passwd= :passwd WHERE userid=:userid";
                 $stmt = $this->conns->prepare($sql);
-                $stmt->bindParam(":passwd", $passwd);
+                $stmt->bindParam(":passwd", hash('ripemd160',$passwd));
                 $stmt->bindParam(":userid", $userid);
                 $stmt->execute();
             }catch (PDOException $e)

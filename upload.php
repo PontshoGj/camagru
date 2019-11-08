@@ -17,7 +17,7 @@ include('./upload2.php');
     <div id="<?php echo $displayhd; ?>">
         <form action="./upload.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="file">
-            <button type="submit" name="submit">Upload</button>
+            <button type="submit" name="submit" >Upload</button>
         </form>
     </div>
     <div class="controller" id="<?php echo $display; ?>" style="display: none;">
@@ -27,15 +27,17 @@ include('./upload2.php');
                 bat<input type="radio" id="rad" name="rad" value="bat">
                 glass<input type="radio" id="rad" name="rad" value="glass">
                 tree<input type="radio" id="rad" name="rad" value="tree">
-                <!-- <input type="hidden" value="<?php echo $base64; ?>" name="dimage"> -->
                 <button type="submit" name="merge">Upload</button>
             </div>
         </form>
     </div>
     </div>
     <script>
-        document.getElementById("hidden").style.display = "initial";
-        document.getElementById("hid").style.display = "none";
+        if (document.getElementById("hidden") && document.getElementById("hid"))
+        {
+            document.getElementById("hidden").style.display = "initial";
+            document.getElementById("hid").style.display = "none";
+        }
     </script>
     <?php include('./footer2.php'); ?>
 </body>

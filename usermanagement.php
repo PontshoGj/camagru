@@ -30,9 +30,9 @@
                 $aa = $this->conns->prepare($sql);
     
                 $aa->bindParam(':username', $this->uname);
-                $aa->bindParam(':fullname', $this->fullname);
+                $aa->bindParam(':fullname', $this->firstname);
                 $aa->bindParam(':email', $this->emails);
-                $aa->bindParam(':passwd', $this->passwd);
+                $aa->bindParam(':passwd', hash( 'ripemd160',$this->passwd));
                 $aa->execute();
             }catch (PDOException $e)
             {

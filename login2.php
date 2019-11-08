@@ -9,7 +9,7 @@
             $va = new userauth();
             echo $va->checklogin($retrive['username'], $retrive['password']);
             if ($va->checklogin($retrive['username'], $retrive['password'])){
-                $val = $va->getuserid($retrive["username"]);
+                $val = $va->getuserid3($retrive["username"]);
                 $_SESSION['username'] = $val[0]['userid'];
                 header("Location: publicgallery.php");
             }

@@ -35,8 +35,8 @@
             <div class="form_reg"> 
                 <div><?php echo $not_val;?></div>
                 <form action="resetpass.php" method="POST">
-                    <p><input type="password" name="password" id="password" placeholder="Password" required></p>
-                    <p><input type="re-password" name="re-password" id="re-password" placeholder="Password" required></p>
+                    <p><input type="password" name="password" id="password" placeholder="Password" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></p>
+                    <p><input type="re-password" name="re-password" id="re-password" placeholder="Password" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></p>
                     <p><input type="hidden" name="userid" value="<?php echo $cc[0]['userid']; ?>" placeholder="<?php echo $cc[0]['userid']; ?>"></p>
                     <p> <input type="submit" value="submit" name="submit"></p>
                 </form>

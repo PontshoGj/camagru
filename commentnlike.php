@@ -75,7 +75,7 @@ class commentnlike{
     public function emailcomment($userid, $kind)
     {
         try{
-            $sql = 'SELECT * FROM users WHERE userid = :userid';
+            $sql = 'SELECT * FROM users WHERE userid = :userid && notif = 1';
             $exe = $this->conns->prepare($sql);
             $exe->bindParam(':userid', $userid);
             $exe->execute();
@@ -99,7 +99,6 @@ class commentnlike{
         }
         $headers = "Content-type: text\r\n";
         mail($to,$subject, $message,$headers);
-
     }
     public function __destruct(){
         $this->conns = NULL;
