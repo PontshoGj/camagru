@@ -9,8 +9,6 @@
             include('./connection.php');
             $this->conns = $conn;
         }
-
-
         /* check if the user provided the correct log in information */
         public function checklogin($uname, $passwd)
         {
@@ -31,7 +29,7 @@
                         return 1;
                 }catch (PDOException $e)
                 {
-                    echo "Selection failed: " . $e->getMessage();
+                    /*echo "Selection failed: " . */$e->getMessage();
                 }
             }
             if(filter_var($uname, FILTER_VALIDATE_EMAIL)){
@@ -48,7 +46,7 @@
                         return 1;
                 }catch (PDOException $e)
                 {
-                    echo "Selection failed: " . $e->getMessage();
+                    /*echo "Selection failed: " . */$e->getMessage();
                 }
              }
              return 0;
@@ -68,7 +66,7 @@
                     return ($exe->fetchAll());
                 }catch (PDOException $e)
                 {
-                    echo $sql . "<br>" . $e->getMessage();
+                    /*echo $sql . "<br>" . */$e->getMessage();
                 }
             }
             if (preg_match('/[A-Za-z0-9]{6,}/', $uname)){
@@ -81,7 +79,7 @@
                     return ($exe->fetchAll());
                 }catch (PDOException $e)
                 {
-                    echo $sql . "<br>" . $e->getMessage();
+                    /*echo $sql . "<br>" . */$e->getMessage();
                 }
             }
             return (0);
@@ -99,7 +97,7 @@
                 return ($exe->fetchAll());
             }catch (PDOException $e)
             {
-                echo $sql . "<br>" . $e->getMessage();
+                /*echo $sql . "<br>" . */$e->getMessage();
             }
             return (0);
         }
@@ -116,7 +114,7 @@
                 return ($exe->fetchAll());
             }catch (PDOException $e)
             {
-                echo $sql . "<br>" . $e->getMessage();
+                /*echo $sql . "<br>" . */$e->getMessage();
             }
             return (0);
         }
@@ -153,7 +151,7 @@
                     $aa->execute();
                 }catch (PDOException $e)
                 {
-                    echo $sql . "<br>" . $e->getMessage() . "\n";
+                    /*echo $sql . "<br>" . */$e->getMessage();
                 }
             }
 
@@ -183,7 +181,7 @@
                     $aa->execute();
                 }catch (PDOException $e)
                 {
-                    echo $sql . "<br>" . $e->getMessage() . "\n";
+                    /*echo $sql . "<br>" . */$e->getMessage();
                 }
             }
         }
@@ -207,7 +205,7 @@
                 $stmt->execute();
             }catch (PDOException $e)
             {
-                echo "Selection failed: " . $e->getMessage();
+                /*echo "Selection failed: " . */$e->getMessage();
             }
             return 1;
         }
@@ -228,7 +226,7 @@
                     return 0;
             }catch (PDOException $e)
             {
-                echo "Selection failed: " . $e->getMessage();
+                /*echo "Selection failed: " . */$e->getMessage();
             }
             return 1;
         }
@@ -256,7 +254,7 @@
                     return 0;
             }catch (PDOException $e)
             {
-                echo "Selection failed: " . $e->getMessage();
+                /*echo "Selection failed: " . */$e->getMessage();
             }
             return 1;
         }
@@ -282,7 +280,7 @@
                 }
             }catch (PDOException $e)
             {
-                echo $sql . "<br>" . $e->getMessage();
+                /*echo $sql . "<br>" . */$e->getMessage();
             }
             return (0);
         }
@@ -299,7 +297,7 @@
                 $stmt->execute();
             }catch (PDOException $e)
             {
-                echo $e->getMessage();
+                $e->getMessage();
             }
             return 1;
         }

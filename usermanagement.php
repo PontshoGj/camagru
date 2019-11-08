@@ -36,7 +36,7 @@
                 $aa->execute();
             }catch (PDOException $e)
             {
-                echo $sql . "<br>" . $e->getMessage() . "\n";
+                /*echo $sql . "<br>" . */$e->getMessage();
             }
             $confirm = new userauth();
             $confirm->emailconfo($this->emails);
@@ -53,7 +53,7 @@
                 // echo "Record deleted successfully\n";
             }catch (PDOException $e)
             {
-                echo $sql . "<br>" . $e->getMessage();
+                /*echo $sql . "<br>" . */$e->getMessage();
             }
         }
         
@@ -72,7 +72,7 @@
                 // echo "Record updated successfully\n";
             }catch (PDOException $e)
             {
-                echo $sql . "<br>" . $e->getMessage();
+                /*echo $sql . "<br>" . */$e->getMessage();
             }
         }
         public function moduserchecked($userids, $emails, $username)
@@ -89,7 +89,7 @@
                 // echo "Record updated successfully\n";
             }catch (PDOException $e)
             {
-                echo $sql . "<br>" . $e->getMessage();
+                /*echo $sql . "<br>" . */$e->getMessage();
             }
         }
         public function moduserch($userids, $emails, $username)
@@ -106,7 +106,7 @@
                 // echo "Record updated successfully\n";
             }catch (PDOException $e)
             {
-                echo $sql . "<br>" . $e->getMessage();
+                /*echo $sql . "<br>" . */$e->getMessage();
             }
         }
         /* select all data for user from the database */
@@ -123,7 +123,7 @@
                 return ($aa->fetchAll());
             }catch (PDOException $e)
             {
-                echo $sql . "<br>" . $e->getMessage();
+                /*echo $sql . "<br>" . */$e->getMessage();
             }
         }
 

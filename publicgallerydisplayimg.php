@@ -11,6 +11,8 @@
             else
                 $i = 0;
             $jj = 0;
+            if (count($display))
+            {
             while($i < count($display) && $jj < 5)
             {
                 echo '<div style="margin-left:5vw; margin-right: 1vw; float: left; margin-bottom: 30px;"><div><img src="'.$display[$i]['images'].'" width="250px" height="250px"></div>';
@@ -51,5 +53,6 @@
                 echo '<div style="float: left;"><form method="post"><input type="hidden" name="back" value="'.$i.'"><button type="submit" value="back" name="submit">back</button></form></div>';
             }
             echo '</div>';
-            unset($hold); 
+            unset($hold);
+            } 
 ?>

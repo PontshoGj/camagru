@@ -36,8 +36,8 @@
             <form action="edituser.php" method="POST">
                 <p><h2>Change Password</h2></p><br/>
                 <p><?php echo $a; ?> </p>
-                <p><input type="password" name="password" id="password"  placeholder=" Change Password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></p>
-                <p><input type="password" name="chkpassword" id="password"  placeholder=" Change Password" required></p><br/>
+                <p><input type="password" name="password" id="password"  placeholder=" Change Password" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></p>
+                <p><input type="password" name="chkpassword" id="password"  placeholder=" Change Password" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></p><br/>
                 <input type="submit" name="submit" value="reset">
             </form>
         </div>
