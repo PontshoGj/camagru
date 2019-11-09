@@ -153,6 +153,7 @@
                 {
                     /*echo $sql . "<br>" . */$e->getMessage();
                 }
+                return 1;
             }
 
             //header("location: login.html");

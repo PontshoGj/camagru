@@ -23,7 +23,7 @@ include("./login2.php");
                 </p>
             </div>
             <div class="form_reg"> 
-                <div><?php echo $not_val;?></div>
+                <div><?php echo ($_GET['not_val']) ?  $_GET['not_val'] : $not_val; ?></div>
                 <form action="login.php" method="POST">
                     <p><input type="text" name="username" placeholder="Username or Email" size="25vw" style="margin-bottom:2vh; margin-top:2vh" id="username" required></p>
                     <p><input type="password" name="password" id="password" placeholder="Password" style="margin-bottom:2vh;" size="25vw" required></p>

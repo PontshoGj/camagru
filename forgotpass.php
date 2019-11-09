@@ -7,8 +7,9 @@
     if ($retrive["email"] && $retrive["submit"]) {
         $va = new userauth();
         if ($va->passwordreset($retrive["email"])){
-            $not_val = "Password reset email is sent to your account";
-            header('location: login.php');
+            echo "aaa";
+            // $not_val = "Password reset email is sent to your account";
+            header('location: login.php?not_val=Password+reset+email+is+sent+to+your+account+click+on+the+link+to+reset');
         }
     }
 ?>

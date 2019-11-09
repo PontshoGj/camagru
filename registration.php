@@ -15,7 +15,7 @@
             $reg = new usermanagment();
             $reg->setdata($array['username'], $array['name'], $array['email'], $array['password']);
             $reg->adduser();
-            header("location: login.php");
+            header("location: login.php?not_val=Account+Comfirm+reset+email+is+sent+to+your+email+account+click+on+the+link+to+activate+your+account");
         }
     }
 ?>
