@@ -21,7 +21,7 @@ class commentnlike{
             $aa->execute();
         }catch (PDOException $e)
         {
-            echo $sql . "<br>" . $e->getMessage() . "\n";
+            $e->getMessage();
         }
     }
 
@@ -38,7 +38,7 @@ class commentnlike{
             $aa->execute();
         }catch (PDOException $e)
         {
-            echo $sql . "<br>" . $e->getMessage() . "\n";
+            $e->getMessage();
         }
     }
 
@@ -53,7 +53,7 @@ class commentnlike{
             return ($exe->fetchAll());
         }catch (PDOException $e)
         {
-            echo $sql . "<br>" . $e->getMessage();
+            $e->getMessage();
         }
     }
 
@@ -68,7 +68,7 @@ class commentnlike{
             return ($exe->fetchAll());
         }catch (PDOException $e)
         {
-            echo $sql . "<br>" . $e->getMessage();
+            $e->getMessage();
         }
     }
 
@@ -83,7 +83,7 @@ class commentnlike{
             $user  = $exe->fetchAll();
         }catch (PDOException $e)
         {
-            echo $sql . "<br>" . $e->getMessage();
+            $e->getMessage();
         }
         $to = $user[0]['email'];
         switch($kind)

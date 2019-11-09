@@ -28,7 +28,7 @@
     ?>   
     <div style="overflow: auto;"> 
     <div style="float: left; margin-left: 20vw;">
-        <form actio="cam.php" method="post">
+        <form actio="cam.php" method="post" id="form">
             <div class="video-wrap" >
                 <video id="video" playsinline autoplay></video>
             </div>
@@ -44,7 +44,7 @@
             <canvas id="canvas" width="450" height="450" style="float:left;"></canvas>
         </form>
     </div>
-    <div style="float: right; width: 35vw; hight: auto;">
+    <div id="select" style="float: right; width: 35vw; hight: auto;">
         <form id="myForm" action="cam.php" method="post">
         <?php
             include_once('./picdb.php');
@@ -62,9 +62,7 @@
     </div>
     </div>
     <?php include('./footer.php'); ?>
-    <!-- <div id="imagediv">
-         <img src="" id="saveimage" style="float: left; border: 1px solid black; margin-left: 10px;">
-    </div> -->
+ 
     <script>
             'use strict';
             const video = document.getElementById('video');
@@ -98,9 +96,27 @@
                 image.setAttribute('value', dataURI);
 
             });
+
+            /*adding the selected pic to the userimage database*/
             function myFunction() {
                 document.getElementById("myForm").submit();
             }
+
+            /*submiting the pic to the back end php*/
+            // const form = document.getElementById("form");
+            // form.addEventListener("submit", e => {
+            //     e.preventDefault();
+            //     const fd = new FormData(form);
+            //     const xhr = new XMLHttpRequest();
+            //     xhr.open("POST", form.action);
+            //     console.log(xhr.status);
+            //     xhr.send(fd);
+            //     if (xhr.status === 0 || xhr.status === 200){
+            //         // let s = document.getElementById("select").innerHTML;
+            //         // console.log(document.getElementById("select").innerHTML);
+            //         // document.getElementById("select").innerHTML = textByLine;
+            //     }
+            // });
         </script>
 
 </body>

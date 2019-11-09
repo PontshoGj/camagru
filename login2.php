@@ -7,7 +7,7 @@
             $retrive[$key] = $value;
         if ($retrive["username"] && $retrive["password"] && $retrive["submit"]) {
             $va = new userauth();
-            echo $va->checklogin($retrive['username'], $retrive['password']);
+            // echo $va->checklogin($retrive['username'], $retrive['password']);
             if ($va->checklogin($retrive['username'], $retrive['password'])){
                 $val = $va->getuserid3($retrive["username"]);
                 $_SESSION['username'] = $val[0]['userid'];

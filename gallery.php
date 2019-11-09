@@ -15,6 +15,23 @@
     <?php include('./nav.php'); ?>
     <div style="overflow: auto;"><?php include('./gallerydisplyimg.php'); ?></div>
     <?php include('./footer.php'); ?>
+    <script>
+                /*submiting the pic to the back end php*/
+            const form = document.getElementById("form");
+            form.addEventListener("submit", e => {
+                e.preventDefault();
+                const fd = new FormData(form);
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", form.action);
+                console.log(xhr.status);
+                xhr.send(fd);
+                if (xhr.status === 0 || xhr.status === 200){
+                    // let s = document.getElementById("select").innerHTML;
+                    // console.log(document.getElementById("select").innerHTML);
+                    // document.getElementById("select").innerHTML = textByLine;
+                }
+            });
+    </script>
 
 </body>
 </html>
