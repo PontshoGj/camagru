@@ -3,6 +3,7 @@
     require_once("./userauth.php");
 
     $array = array();
+    $re = "";
     foreach($_POST as $key => $value)
         $array[$key] = $value;
 
@@ -16,6 +17,13 @@
             $reg->setdata($array['username'], $array['name'], $array['email'], $array['password']);
             $reg->adduser();
             header("location: login.php?not_val=Account+Comfirm+reset+email+is+sent+to+your+email+account+click+on+the+link+to+activate+your+account");
+        }else{
+            if (!$array['username'])
+                $re = "username not available";
+            if (!$array['email'])
+                $re = "email not available";
+            if (!$array['email'] && !$array['username'])
+                $re = "email and username not available";
         }
     }
 ?>
@@ -39,6 +47,7 @@
                 <p>
                     <h1>CAMAGRU</h1>
                 </p>
+                <p><?php echo $re; ?></p>
                 <p>Sign up to see photos and videos from your friends.</p>
             </div>
             <div class="form_reg" >
