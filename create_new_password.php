@@ -21,10 +21,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/publicgallery.css">
     <title>Password Rest</title>
 </head>
 
 <body>
+    <?php include('./nav.php'); ?>
     <div class="Container">
         <div class="box-1">
             <div>
@@ -35,8 +37,8 @@
             <div class="form_reg"> 
                 <div><?php echo $not_val;?></div>
                 <form action="resetpass.php" method="POST">
-                    <p><input type="password" name="password" id="password" placeholder="Password" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></p>
-                    <p><input type="re-password" name="re-password" id="re-password" placeholder="Password" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></p>
+                    <p><input type="password" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required></p>
+                    <p><input type="password" name="re-password" id="re-password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required></p>
                     <p><input type="hidden" name="userid" value="<?php echo $cc[0]['userid']; ?>" placeholder="<?php echo $cc[0]['userid']; ?>"></p>
                     <p> <input type="submit" value="submit" name="submit"></p>
                 </form>

@@ -8,6 +8,7 @@
         $va = new userauth();
         if ($va->passwordreset($retrive["email"])){
             $not_val = "Password reset email is sent to your account";
+            header('location: login.php');
         }
     }
 ?>
@@ -17,10 +18,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/publicgallery.css">
     <title>Forgot Password</title>
 </head>
 
 <body>
+    <?php include('./nav.php'); ?>
     <div class="Container">
         <div class="box-1">
             <div>
@@ -32,7 +35,7 @@
                 <div><?php echo $not_val;?></div>
                 <form action="forgotpass.php" method="POST">
                     <p><input type="email" name="email" id="email" placeholder="Email" required></p>
-                    <p> <input type="submit" value="Login" name="submit" id="submit"></p>
+                    <p> <input type="submit" value="submit" name="submit" id="submit"></p>
                 </form>
             </div>
             <div>
