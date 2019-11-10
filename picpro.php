@@ -20,7 +20,7 @@
                 $image1 = imagecreatefromstring(file_get_contents($image1));
                 $image2 = imagecreatefromstring(file_get_contents($image2));
 
-                imagecopymerge($image1, $image2, 0, 100, 0, 0, $width, $height, 100);
+                imagecopy($image1, $image2, 0, 100, 0, 0, $width, $height, 100);
                 imagepng($image1, 'merge.png');
 
                 $data = file_get_contents('merge.png');

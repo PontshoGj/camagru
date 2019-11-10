@@ -63,7 +63,7 @@
           OK tinyint(4) NOT NULL DEFAULT '0',
           notif tinyint(4) NOT NULL DEFAULT '1'
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
-        echo "aaaaaa";
+        echo "dtatabase create";
         $conn = NULL;
     }
     catch(PDOException $e)

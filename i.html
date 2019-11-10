@@ -31,11 +31,4 @@ form.addEventListener("submit", e => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", form.action);
     xhr.send(fd);
-    <!-- xhr.addEventListener("load", e => {
-        console.log(e.target.responseText);
-    });
-    xhr.addEventListener("error", e => {
-        console.log(e);
-    }); -->
-
 });

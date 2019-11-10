@@ -35,10 +35,11 @@
 
                 <input type="hidden" value="" id="image" name="image">
             <div class="controller">
-                <button id="snap" type="submit">Capture</button>
-                bat<input type="radio" id="rad" name="rad" value="bat">
-                glass<input type="radio" id="rad" name="rad" value="glass">
-                tree<input type="radio" id="rad" name="rad" value="tree">
+                <button id="snap" type="submit" disabled>Capture</button>
+                bat<input type="radio" id="rad" onclick="dis()" name="rad" value="bat">
+                glass<input type="radio" id="rad" onclick="dis()" name="rad" value="glass">
+                tree<input type="radio" id="rad" onclick="dis()" name="rad" value="tree">
+                none<input type="radio" id="rad" onclick="dis()" name="rad" value="none">
             </div>
 
             <canvas id="canvas" width="450" height="450" style="float:left;"></canvas>
@@ -65,6 +66,10 @@
  
     <script>
             'use strict';
+            function dis()
+            {
+                document.getElementById('snap').disabled = false;
+            }
             const video = document.getElementById('video');
             const canvas = document.getElementById('canvas');
             const snap = document.getElementById('snap');
@@ -101,22 +106,6 @@
             function myFunction() {
                 document.getElementById("myForm").submit();
             }
-
-            /*submiting the pic to the back end php*/
-            // const form = document.getElementById("form");
-            // form.addEventListener("submit", e => {
-            //     e.preventDefault();
-            //     const fd = new FormData(form);
-            //     const xhr = new XMLHttpRequest();
-            //     xhr.open("POST", form.action);
-            //     console.log(xhr.status);
-            //     xhr.send(fd);
-            //     if (xhr.status === 0 || xhr.status === 200){
-            //         // let s = document.getElementById("select").innerHTML;
-            //         // console.log(document.getElementById("select").innerHTML);
-            //         // document.getElementById("select").innerHTML = textByLine;
-            //     }
-            // });
         </script>
 
 </body>

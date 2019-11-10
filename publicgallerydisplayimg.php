@@ -6,10 +6,17 @@
             $display = $arr->getall();
             if (strcmp($_POST['submit'],'next') == 0)
                 $i = ($_POST['next']) ? $_POST['next'] : 0;
-            elseif (strcmp($_POST['submit'],'back') == 0 && $_POST['back'] > 10)
-                $i = ($_POST['back']) ? $_POST['back'] - 10 : 0;
             else
                 $i = 0;
+            echo '<div class="bl">';
+            $s = 0;
+            $d = 0;
+            while (count($display) >= $s)
+            {
+                echo '<div style="float: left;"><form method="post"><input type="hidden" name="next" value="'.($s).'"><button type="submit" value="next" name="submit">'.$d++.'</button></form></div>';
+               $s += 5;
+            }
+            echo '</div><br/><br/>';
             $jj = 0;
             if (count($display))
             {
@@ -42,17 +49,8 @@
                 $i++;
                 $jj++;
             }
-            echo '<div class="bl">';
-            if (count($display) > $i)
-            {
-                echo '<div style="float: left;"><form method="post"><input type="hidden" name="next" value="'.$i.'"><button type="submit" value="next"  name="submit">next</button></form></div>';
-                if ($i > 5)
-                    echo '<div style="float: left;"><form method="post"><input type="hidden" name="back" value="'.$i.'"><button type="submit" value="back" name="submit">back</button></form></div>';
 
-            }else{
-                echo '<div style="float: left;"><form method="post"><input type="hidden" name="back" value="'.$i.'"><button type="submit" value="back" name="submit">back</button></form></div>';
-            }
-            echo '</div>';
             unset($hold);
-            } 
+            }
+
 ?>
