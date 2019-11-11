@@ -16,4 +16,6 @@ catch(PDOException $e)
 {
     echo "Connection failed: " . $e->getMessage();
 }
+
+include_once('./database.php');
 ?>

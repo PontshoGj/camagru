@@ -13,10 +13,11 @@ class commentnlike{
             $sql = 'INSERT INTO comments (userid, useridown, comment, timess, imagenu)
                     VALUES ( :userid, :useridown, :comment, :timess, :imagenu)';
             $aa = $this->conns->prepare($sql);
+            $a = date("U");
             $aa->bindParam(':userid', $userid);
             $aa->bindParam(':useridown', $useridown);
             $aa->bindParam(':comment', $comment);
-            $aa->bindParam(':timess', date("U"));
+            $aa->bindParam(':timess', $a);
             $aa->bindParam(':imagenu', $imagenu);
             $aa->execute();
         }catch (PDOException $e)
@@ -31,9 +32,10 @@ class commentnlike{
             $sql = 'INSERT INTO likes (userid, useridown, timess, imagenu)
                     VALUES ( :userid, :useridown, :timess, :imagenu)';
             $aa = $this->conns->prepare($sql);
+            $a = date("U");
             $aa->bindParam(':userid', $userid);
             $aa->bindParam(':useridown', $useridown);
-            $aa->bindParam(':timess', date("U"));
+            $aa->bindParam(':timess', $a);
             $aa->bindParam(':imagenu', $imagenu);
             $aa->execute();
         }catch (PDOException $e)

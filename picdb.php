@@ -37,7 +37,7 @@ class picdb{
     public function getall()
     {
         try{
-            $sql = 'SELECT * FROM userimage';
+            $sql = 'SELECT * FROM userimage ORDER BY timess dESC';
             $stmt = $this->co->prepare($sql);
             $stmt->execute();
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);

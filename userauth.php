@@ -18,10 +18,11 @@
             if (preg_match('/[A-Za-z0-9]{6,}/', $uname)){
                 try{
                     $a = "1";
+                    $passd = hash('ripemd160',$passwd);
                     $sql = 'SELECT * FROM users WHERE username = :uname && passwd = :passwd && OK = :a';
                     $stmt = $this->conns->prepare($sql);
                     $stmt->bindParam(":uname", $uname);
-                    $stmt->bindParam(":passwd", hash('ripemd160',$passwd));
+                    $stmt->bindParam(":passwd", $passd);
                     $stmt->bindParam(":a", $a);
                     $stmt->execute();
                     $rot = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -35,10 +36,11 @@
             if(filter_var($uname, FILTER_VALIDATE_EMAIL)){
                 try{
                     $a = "1";
+                    $passd = hash('ripemd160',$passwd);
                     $sql = 'SELECT * FROM users WHERE email = :uname && passwd = :passwd && OK = :a';
                     $stmt = $this->conns->prepare($sql);
                     $stmt->bindParam(":uname", $uname);
-                    $stmt->bindParam(":passwd", hash('ripemd160',$passwd));
+                    $stmt->bindParam(":passwd", $passd);
                     $stmt->bindParam(":a", $a);
                     $stmt->execute();
                     $rot = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -135,7 +137,7 @@
             $message =  "We revieved a password reset request. The link to reset your password\n";
             $message .= '<a href="'. $url . '">'. $url.'</a>';
 
-            $headers .= "Content-type: text/html\r\n";
+            $headers = "Content-type: text/html\r\n";
             if (mail($to,$subject, $message,$headers))
             {
                 $val = $this->getuserid($email);
@@ -291,9 +293,10 @@
             if (strcmp($passwd, $re_passwd))
                 return 0;
             try{
+                $passwd = hash('ripemd160',$passwd);
                 $sql = "UPDATE users SET passwd= :passwd WHERE userid=:userid";
                 $stmt = $this->conns->prepare($sql);
-                $stmt->bindParam(":passwd", hash('ripemd160',$passwd));
+                $stmt->bindParam(":passwd", $passwd);
                 $stmt->bindParam(":userid", $userid);
                 $stmt->execute();
             }catch (PDOException $e)

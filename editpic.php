@@ -1,4 +1,6 @@
 <?php
+        error_reporting(0);
+        $type = 'png';
         switch($retrive['rad']){
             case "bat":
                 $list = scandir('./');
@@ -20,7 +22,8 @@
                 imagepng($image1, 'merge.png');
 
                 $data = file_get_contents('merge.png');
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $ba = base64_encode($data);
+                $base64 = 'data:image/' . $type . ';base64,' . $ba;
 
                 include('savimg.php');
                 $ar = new saveimg();
@@ -48,7 +51,8 @@
                 imagepng($image1, 'merge.png');
 
                 $data = file_get_contents('merge.png');
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $ba = base64_encode($data);
+                $base64 = 'data:image/' . $type . ';base64,' . $ba;
 
                 include('savimg.php');
                 $ar = new saveimg();
@@ -76,8 +80,8 @@
                 imagepng($image1, 'merge.png');
 
                 $data = file_get_contents('merge.png');
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-
+                $ba = base64_encode($data);
+                $base64 = 'data:image/' . $type . ';base64,' . $ba;
                 include('savimg.php');
                 $ar = new saveimg();
                 $ar->saveimg($base64, $_SESSION['username']);
@@ -94,7 +98,8 @@
                     $i++;
                 } 
                 $data = file_get_contents($image1);
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $ba = base64_encode($data);
+                $base64 = 'data:image/' . $type . ';base64,' . $ba;                
                 include('savimg.php');
                 $ar = new saveimg();
                 $ar->saveimg($base64, $_SESSION['username']);

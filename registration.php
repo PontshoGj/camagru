@@ -7,7 +7,7 @@
     foreach($_POST as $key => $value)
         $array[$key] = $value;
 
-    if ($array['username'] && $array['name'] && $array['email'] && $array['password'])
+    if (isset($array['username']) && isset($array['name']) && isset($array['email']) && isset($array['password']))
     {
         $va = new userauth();
         //echo $va->test_email($retrive['email']);
@@ -54,8 +54,8 @@
                 <form action="registration.php" method="post">
                     <p><input type="email" name="email" id="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Invalid email format" required size="25vw;" style="margin-top:2vh;"></p>
                     <p><input type="text" name="name" placeholder="Full Name" id="name" size="25vw;" style="margin-top:2vh;"></p>
-                    <p> <input type="text" name="username" placeholder="Username" id="username" pattern="[A-Za-z0-9]{6,}" required size="25vw;" style="margin-top:2vh;"></p>
-                    <p><input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password" size="25vw;" style="margin-top:2vh;margin-bottom:2vh;" required title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"></p>
+                    <p> <input type="text" name="username" placeholder="Username" id="username" pattern="[A-Za-z0-9]{6,}" autocomplete="off"  required size="25vw;" style="margin-top:2vh;"></p>
+                    <p><input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password" autocomplete="off"  size="25vw;" style="margin-top:2vh;margin-bottom:2vh;" required title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"></p>
                     <p><input type="submit" value="Sign Up" name="submit" id="submit" style="margin-bottom:2vh;"></p>
                 </form>
             </div>

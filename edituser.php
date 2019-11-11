@@ -25,8 +25,8 @@
             <form action="edituser.php" method="post">
                 <p><h2>Change User Details</h2></p><br/>
                 <p><?php echo $ba; ?> </p>
-                <p><input type="email" name="email" id="email" placeholder="<?php echo $hol[0]['email']; ?>" value="<?php echo $hol[0]['email']; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Invalid email format"></p>
-                <p> <input type="text" name="username" placeholder="<?php echo $hol[0]['username'] ?>" value="<?php echo $hol[0]['username'] ?>" id="username" pattern="[A-Za-z0-9]{6,}"></p>
+                <p><input type="email" name="email" id="email" autocomplete="off"  placeholder="<?php echo $hol[0]['email']; ?>" value="<?php echo $hol[0]['email']; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Invalid email format"></p>
+                <p> <input type="text" name="username" autocomplete="off"  placeholder="<?php echo $hol[0]['username'] ?>" value="<?php echo $hol[0]['username'] ?>" id="username" pattern="[A-Za-z0-9]{6,}"></p>
                 <p><input type="checkbox" name="email_preference"  <?php include('chk.php'); ?> > Receive email Notification?</p><br/>
                 <p><input type="submit" value="Update" name="submit" id="submit"></p>
             </form>
@@ -36,9 +36,9 @@
             <form action="edituser.php" method="POST">
                 <p><h2>Change Password</h2></p><br/>
                 <p><?php echo $a; ?> </p>
-                <p><input type="password" name="password" id="password"  placeholder=" Change Password" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></p>
-                <p><input type="password" name="chkpassword" id="password"  placeholder=" Change Password" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></p><br/>
-                <input type="submit" name="submit" value="reset">
+                <p><input type="password" name="password" id="password" autocomplete="off"  placeholder=" Change Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></p>
+                <p><input type="password" name="chkpassword" id="passwords" autocomplete="off"  placeholder=" Change Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required></p><br/>
+                <input type="submit" name="submit" autocomplete="off"  value="reset">
             </form>
         </div>
     </div>

@@ -2,7 +2,7 @@
     echo '<div class="header">';
         echo '<ul>';
 
-            if ($_SESSION["username"])
+            if (isset($_SESSION["username"]))
             {
                 echo '<li><a href="gallery.php">Profile</a></li>';
                 echo '<li><a href="cam.php">cam</a></li>';

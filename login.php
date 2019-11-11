@@ -1,5 +1,6 @@
 <?php
-include("./login2.php");
+session_start();
+$not_val = " ";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,11 +24,11 @@ include("./login2.php");
                 </p>
             </div>
             <div class="form_reg"> 
-                <div><?php echo ($_GET['not_val']) ?  $_GET['not_val'] : $not_val; ?></div>
-                <form action="login.php" method="POST">
+                <div><?php echo (isset($_GET['not_val'])) ?  $_GET['not_val'] : $not_val; ?></div>
+                <form action="login2.php" method="POST">
                     <p><input type="text" name="username" placeholder="Username or Email" size="25vw" style="margin-bottom:2vh; margin-top:2vh" id="username" required></p>
-                    <p><input type="password" name="password" id="password" placeholder="Password" style="margin-bottom:2vh;" size="25vw" required></p>
-                    <p> <input type="submit" value="Login" name="submit" id="submit" style="margin-bottom:2vh;"></p>
+                    <p><input type="password" name="password" id="password" placeholder="Password" style="margin-bottom:2vh;" autocomplete="off" size="25vw" required></p>
+                    <p> <input type="submit" value="Login" name="submit" id="submit" autocomplete="off" style="margin-bottom:2vh;"></p>
                 </form>
             </div>
             <div>

@@ -5,16 +5,18 @@
         $not_val = "";
         foreach($_POST as $key => $value)
             $retrive[$key] = $value;
-        if ($retrive["username"] && $retrive["password"] && $retrive["submit"]) {
-            $va = new userauth();
-            // echo $va->checklogin($retrive['username'], $retrive['password']);
-            if ($va->checklogin($retrive['username'], $retrive['password'])){
-                $val = $va->getuserid3($retrive["username"]);
-                $_SESSION['username'] = $val[0]['userid'];
-                header("Location: publicgallery.php");
-            }
-            else{
-                $not_val = "incorect username or password";
+        if (isset($_POST))
+        {
+            if ($retrive["username"] && $retrive["password"] && $retrive["submit"]) {
+                $va = new userauth();
+                if ($va->checklogin($retrive['username'], $retrive['password'])){
+                    $val = $va->getuserid3($retrive["username"]);
+                    $_SESSION['username'] = $val[0]['userid'];
+                    header("Location: publicgallery.php");
+                }
+                else{
+                    header("location: login.php?not_val=incorrect+username+or+password");
+                }
             }
         }
 ?>

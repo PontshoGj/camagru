@@ -31,18 +31,13 @@ include_once('./sessionmanagement.php');
                     $display = "hidden";
                     $displayhd = "hid";
                     $data = file_get_contents('merge.'.$fileAxtualExt);
+                    $type = "";
                     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     // echo $base64;
                     // header("Location: editpic.php");
 
-                }else{
-                    echo "file too big";
                 }
-            }else{
-                echo "there was error with upload";
             }
-        }else{
-            echo "can not upload file";
         }
     }
     if (isset($_POST['merge'])){

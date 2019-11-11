@@ -2,6 +2,7 @@
    include("./userauth.php");
    $retrive = array();
    $cc = "";
+   $not_val = "";
    foreach($_GET as $key => $value)
       $retrive[$key] = $value;
    if ($retrive["selec"] && $retrive["validator"]) {
@@ -35,10 +36,10 @@
                 </p>
             </div>
             <div class="form_reg"> 
-                <div><?php echo $not_val;?></div>
+                <div><?php echo (isset($not_val)) ? $not_val : $not_val;?></div>
                 <form action="resetpass.php" method="POST">
-                    <p><input type="password" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required></p>
-                    <p><input type="password" name="re-password" id="re-password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required></p>
+                    <p><input type="password" name="password" id="password" placeholder="Password" autocomplete="off"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required></p>
+                    <p><input type="password" name="re-password" autocomplete="off"  id="re-password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required></p>
                     <p><input type="hidden" name="userid" value="<?php echo $cc[0]['userid']; ?>" placeholder="<?php echo $cc[0]['userid']; ?>"></p>
                     <p> <input type="submit" value="submit" name="submit"></p>
                 </form>

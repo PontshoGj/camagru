@@ -4,7 +4,7 @@
     $not_val = "";
     foreach($_POST as $key => $value)
         $retrive[$key] = $value;
-    if ($retrive["email"] && $retrive["submit"]) {
+    if (isset($retrive["email"]) && isset($retrive["submit"])) {
         $va = new userauth();
         if ($va->passwordreset($retrive["email"])){
             echo "aaa";

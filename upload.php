@@ -1,4 +1,5 @@
 <?php
+$base64 = "";
 include('./upload2.php');
 ?>
 

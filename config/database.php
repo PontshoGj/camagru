@@ -1,6 +1,6 @@
 <?php
 
-include("setup.php");
+include_once("setup.php");
 try
 {
     $conn->exec("

@@ -5,9 +5,9 @@
     $not_val = "";
     foreach($_POST as $key => $value)
         $retrive[$key] = $value;
-    if ($_SESSION["username"]  && $retrive['submit'])
+    if (isset($_SESSION["username"])  && isset($retrive['submit']))
     {
-        if($retrive['comment'] && $retrive['userid'] && $_SESSION['username'] && $retrive['imagenu'])
+        if(isset($retrive['comment']) && isset($retrive['userid']) && isset($_SESSION['username']) && isset($retrive['imagenu']))
         {
             include_once('commentnlike.php');
             $ad = new commentnlike();
@@ -15,7 +15,7 @@
             $ad->emailcomment($_SESSION['username'], 'comment');
             unset($ad);
         }
-    }elseif ($_SESSION["username"] && $retrive['like'])
+    }elseif (isset($_SESSION["username"]) && isset($retrive['like']))
     {
         if($retrive['like'] && $_SESSION['username'])
         {

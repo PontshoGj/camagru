@@ -4,10 +4,14 @@
             $hold = new commentnlike();
             $arr = new picdb();
             $display = $arr->getall();
+            $i = 0;
+            if (isset($_POST['submit']))
+            {
             if (strcmp($_POST['submit'],'next') == 0)
                 $i = ($_POST['next']) ? $_POST['next'] : 0;
-            else
+            }else
                 $i = 0;
+
             echo '<div class="bl">';
             $s = 0;
             $d = 0;

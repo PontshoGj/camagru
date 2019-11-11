@@ -1,6 +1,7 @@
  <?php
     include_once('./sessionmanagement.php');
     include_once('picpro.php');
+    if (isset($_POST['ims'])){
     if ($_POST['ims'])
     {
         include('savimg.php');
@@ -8,7 +9,7 @@
         $ar->saveimg($_POST['ims'], $_SESSION['username']);
         $s = shell_exec('rm merge.png');
         header("Location: gallery.php");
-    }
+    }}
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/publicgallery.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
     <title>Edit</title>
  
 </head>
@@ -77,7 +78,7 @@
             const errorMsgElement = document.getElementById('span#ErrorMsg');
             const constraints = {
                 video:{
-                    width: 450, height: 450
+                    width: 250, height: 250
                 }
             };
             async function init()

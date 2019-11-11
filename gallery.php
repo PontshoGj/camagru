@@ -15,21 +15,5 @@
     <?php include('./nav.php'); ?>
     <div style="overflow: auto;"><?php include('./gallerydisplyimg.php'); ?></div>
     <?php include('./footer.php'); ?>
-    <script>
-                /*submiting the pic to the back end php*/
-            // if (document.getElementById("form").addEventListener("click", sub))
-            // {
-            function sub(){
-                const forms = document.getElementById('form');
-                forms.addEventListener("submit", e => {
-                    e.preventDefault();
-                    const fd = new FormData(form);
-                    const xhr = new XMLHttpRequest();
-                    xhr.open("POST", form.action);
-                    xhr.send(fd);
-                });
-            }
-    </script>
-
 </body>
 </html>

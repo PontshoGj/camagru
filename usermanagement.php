@@ -28,11 +28,11 @@
                 $sql = 'INSERT INTO users (username, fullname, email, passwd)
                         VALUES ( :username, :fullname, :email, :passwd)';
                 $aa = $this->conns->prepare($sql);
-    
+                $pass = hash( 'ripemd160',$this->passwd);
                 $aa->bindParam(':username', $this->uname);
                 $aa->bindParam(':fullname', $this->firstname);
                 $aa->bindParam(':email', $this->emails);
-                $aa->bindParam(':passwd', hash( 'ripemd160',$this->passwd));
+                $aa->bindParam(':passwd', $pass);
                 $aa->execute();
             }catch (PDOException $e)
             {
