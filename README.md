@@ -9,6 +9,6 @@ This is a PHP project so you have to start LAMP, MAMP, WAMP or other apache serv
 
 git clone https://github.com/Swaryaletsang/camagru.git 
 
-Then you must go to localhost:/camagru/config/ to install the database and fill it.
+Then you must go to localhost:/camagru/config/install.php to install the database and fill it.
 
 Once your database is created you can create an account and ENJOY.
